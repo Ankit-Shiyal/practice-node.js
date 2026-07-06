@@ -1,4 +1,4 @@
-// checkAuth
+
 import HttpError from "./HttpError.js";
 
 const checkAuth = async (req, res, next) => {

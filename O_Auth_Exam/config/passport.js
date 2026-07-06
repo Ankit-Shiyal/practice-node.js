@@ -1,4 +1,4 @@
-// passport
+
 import passport from "passport";
 import googlePassport from "passport-google-oauth20";
 
