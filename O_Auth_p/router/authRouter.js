@@ -1,4 +1,4 @@
-// authRouter
+
 import express from "express";
 import passport from "passport";
 const router = express.Router();
@@ -6,7 +6,6 @@ const router = express.Router();
 router.get("/login", (req, res) => {
   res.render("login");
 });
-
 
 router.get("/google/login", passport.authenticate("google", { scope: [["email"], ["profile"]] }))
 
@@ -27,7 +26,5 @@ router.get("/logout", (req, res, next) => {
 
   res.redirect("/");
 });
-
-
 
 export default router;

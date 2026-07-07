@@ -1,4 +1,3 @@
-
 import express from "express";
 import session from "express-session";
 import dotenv from "dotenv";
@@ -46,7 +45,6 @@ app.use((error, req, res, next) => {
     if (res.headersSent) {
         return next(new HttpError(error.message))
     }
-
     res.status(error.statusCode || 500).json({
         message: error.message || "internal server error"
     })

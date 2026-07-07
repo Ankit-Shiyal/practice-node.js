@@ -1,12 +1,10 @@
-// passport
 import passport from "passport";
 import googlePassport from "passport-google-oauth20";
 
 import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
 
 import User from "../model/UserModel.js";
-
-dotenv.config({ path: "./.env" });
 
 const googleStrategy = googlePassport.Strategy;
 

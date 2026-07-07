@@ -1,5 +1,3 @@
-// profileRouter
-
 import express from "express";
 import checkAuth from "../middleware/checkAuth.js";
 
