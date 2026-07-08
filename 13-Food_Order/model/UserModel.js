@@ -1,6 +1,9 @@
+
+// external module
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+// mongoose schema
 const userScheme = await mongoose.Schema(
   {
     Name: {
@@ -46,6 +49,7 @@ const userScheme = await mongoose.Schema(
   },
 );
 
+// hash Password
 userScheme.pre("save", async function () {
   const user = this;
   if (user.isModified("Password")) {

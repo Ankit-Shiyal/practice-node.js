@@ -20,4 +20,26 @@ const add = async (req, res, next) => {
     }
 }
 
-export default {add}
+const getAllUser = async (req, res, next)=>{
+
+    try {
+        
+        const user=await modelUser.find({})
+
+        if(user.length === 0){
+            return next(new HttpError("User data not found", 404))
+        }
+
+        res.status(200).json({success:true, message:"All user data", Total:user.length, user})
+
+    } catch (error) {
+          next(new HttpError(error.message, 500));
+        
+    }
+
+}
+
+
+
+
+export default {add, getAllUser}
