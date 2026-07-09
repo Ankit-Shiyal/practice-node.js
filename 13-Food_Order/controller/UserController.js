@@ -5,8 +5,7 @@ import HttpError from "../middleware/HttpError.js";
 // add user
 const add = async (req, res, next) => {
   try {
-    const { Name, Email, Password, Role, Address, Phone } =
-      req.body;
+    const { Name, Email, Password, Role, Address, Phone } = req.body;
 
     const newUser = await modelUser({
       Name,
@@ -15,7 +14,6 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
-
     });
 
     await newUser.save();
@@ -74,12 +72,28 @@ const login = async (req, res, next) => {
 const authLogin = async (req, res, next) => {
   const user = req.user;
 
-  console.log(user)
+  console.log(user);
 
   res
     .status(200)
-    .json({ success: true, message: "auth login successfully", user});
+    .json({ success: true, message: "auth login successfully", user });
+};
+
+// delete user
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    await user.deleteOne();
+
+    res
+      .status(200)
+      .json({ success: true, message: "user data delete successfully" });
+  } catch (error) {
+    next(new HttpError(error.message));
+  }
 };
 
 
-export default { add, getAllUser, login, authLogin };
+export default { add, getAllUser, login, authLogin, deleteUser  };
