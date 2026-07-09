@@ -28,7 +28,7 @@ const userScheme = await mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["customer", "provider", "admin"],
+      enum: ["customer", "provider"],
       default: "customer",
     },
     Address: {
@@ -116,3 +116,4 @@ userScheme.methods.generateAuthToken = async function () {
 const modelUser = mongoose.model("user", userScheme);
 
 export default modelUser;
+                                                                              
