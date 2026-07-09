@@ -95,5 +95,36 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) => {
+  try {
+    const user = req.user;
 
-export default { add, getAllUser, login, authLogin, deleteUser  };
+    const updates = Object.keys(req.body);
+
+    const allowedFiled = ["Name", "Password", "Address", "Phone"];
+
+    const isValidUpdate = updates.every((filed) => {
+      return allowedFiled.includes(filed);
+    });
+
+    if (!isValidUpdate) {
+      return next(new HttpError("only allowed filed can update", 404));
+    }
+
+    updates.forEach((update) => {
+      user[update] = req.body[update];
+    });
+
+    await user.save();
+
+    res.status(200).json({
+      message: "user data updated successfully",
+      user,
+    });
+  } catch (error) {
+    next(new HttpError(error.message));
+
+  }
+};
+
+export default { add, getAllUser, login, authLogin, deleteUser, updateUser };
