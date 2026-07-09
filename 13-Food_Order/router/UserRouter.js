@@ -6,12 +6,13 @@ import express from "express"
 import UserController from "../controller/UserController.js"
 import userSchema from "../validation/UserSchema.js" 
 import validate from "../middleware/validate.js";
+import auth from "../middleware/auth.js";
 // router
 const router = express.Router()
 
 router.post("/add", validate(userSchema),UserController.add)
-router.get("/allUser", UserController.getAllUser)
+router.get("/allUser",auth, UserController.getAllUser)
 router.post("/userLogin", UserController.login)
-router.post("/authLogin", UserController.authLogin)
+router.post("/authLogin",auth, UserController.authLogin)
 
 export default router;
