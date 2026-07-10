@@ -123,8 +123,22 @@ const updateUser = async (req, res, next) => {
     });
   } catch (error) {
     next(new HttpError(error.message));
+  }
+};
+
+const logout = async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    user.tokens = user.tokens.filter((t) => t.token != req.token);
+    await user.save();
+
+    res.status(200).json({ success:true ,message:"user logout successfully"})
+
+  } catch (error) {
+    next(new HttpError(error.message));
 
   }
 };
 
-export default { add, getAllUser, login, authLogin, deleteUser, updateUser };
+export default { add, getAllUser, login, authLogin, deleteUser, updateUser, logout };

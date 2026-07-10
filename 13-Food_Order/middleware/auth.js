@@ -19,17 +19,16 @@ const auth = async (req, res, next) => {
       "tokens.token": token,
     });
 
-    if(!user){
-        return next(new HttpError ("Authentication failed", 404))
+    if (!user) {
+      return next(new HttpError("Authentication failed", 404));
     }
 
-    req.user= user
-    req.token=token
+    req.user = user;
+    req.token = token;
 
-    next()
-
+    next();
   } catch (error) {
-     next(new HttpError("please authenticate", 401));
+    next(new HttpError("please authenticate", 401));
   }
 };
 
