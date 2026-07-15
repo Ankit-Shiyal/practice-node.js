@@ -1,5 +1,8 @@
+
+// // external module
 import Joi from "joi";
 
+// validation
 const userSchema = Joi.object({
   Name: Joi.string().min(2).max(30).trim().required().messages({
     "string.base": "Name must be in String format",

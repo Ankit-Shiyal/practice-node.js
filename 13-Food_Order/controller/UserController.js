@@ -17,7 +17,7 @@ const add = async (req, res, next) => {
     });
 
     await newUser.save();
-
+ 
     res.status(201).json({ success: true, message: "new User added", newUser });
   } catch (error) {
     next(new HttpError(error.message, 500));
@@ -95,6 +95,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+// update user
 const updateUser = async (req, res, next) => {
   try {
     const user = req.user;
@@ -126,6 +127,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+// update logout
 const logout = async (req, res, next) => {
   try {
     const user = req.user;
@@ -141,6 +143,7 @@ const logout = async (req, res, next) => {
   }
 };
 
+// logout from all dives
 const logoutAll = async (req, res, next) => {
   try {
     req.user.tokens = [];
@@ -164,5 +167,5 @@ export default {
   deleteUser,
   updateUser,
   logout,
-  logoutAll
+  logoutAll,
 };

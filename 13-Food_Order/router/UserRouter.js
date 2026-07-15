@@ -19,6 +19,4 @@ router.patch("/update", auth, UserController.updateUser)
 router.get("/logoutUser", auth, UserController.logout)
 router.get("/allLogout", auth, UserController.logoutAll)
 
-
-
 export default router;
