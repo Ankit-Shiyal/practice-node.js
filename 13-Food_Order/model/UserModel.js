@@ -28,7 +28,7 @@ const userScheme = await mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["customer", "provider"],
+      enum: ["customer", "admin"],
       default: "customer",
     },
     Address: {

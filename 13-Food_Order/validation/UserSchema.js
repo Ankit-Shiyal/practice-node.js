@@ -20,7 +20,7 @@ const userSchema = Joi.object({
     "string.max": "Password must be 20 character long",
     "any.required": "Password ir required",
   }),
-  Role: Joi.string().valid("customer", "provider").default("customer"),
+  Role: Joi.string().valid("customer", "admin").default("customer"),
   Address:Joi.string().min(5).max(100).required().messages({
     "string.base": "Address must be in string format",
     "string.min": "Address must be at least 5 character long",
