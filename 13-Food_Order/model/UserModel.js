@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
 // mongoose schema
 const userScheme = await mongoose.Schema(
   {
@@ -39,6 +40,13 @@ const userScheme = await mongoose.Schema(
       type: Number,
       required: true,
     },
+    Profile_Pic:{
+      type:String
+    },
+    Cloudinary_Id:{
+      type:String
+    }
+    ,
     isVerified: {
       type: Boolean,
       default: false,

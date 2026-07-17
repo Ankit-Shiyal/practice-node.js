@@ -8,10 +8,11 @@ import userSchema from "../validation/UserSchema.js"
 import validate from "../middleware/validate.js";
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
+import upload from "../middleware/upload.js";
 // router
 const router = express.Router()
 
-router.post("/add", validate(userSchema),UserController.add)
+router.post("/add", validate(userSchema),upload.single("Profile_Pic"),UserController.add)
 router.post("/userLogin", UserController.login)
 router.post("/authLogin",auth, UserController.authLogin)
 router.delete("/delete", auth, UserController.deleteUser)

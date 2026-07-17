@@ -1,6 +1,7 @@
 // local module
 import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
+import cloudinary from "../config/cloudinary.js";
 
 // add user
 const add = async (req, res, next) => {
@@ -14,6 +15,8 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
+      Profile_Pic:req.file?.path,
+      Cloudinary_Id:req.file.filename,
     });
 
     await newUser.save();
