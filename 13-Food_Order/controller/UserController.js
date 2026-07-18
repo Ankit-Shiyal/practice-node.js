@@ -97,6 +97,16 @@ const updateUser = async (req, res, next) => {
       return next(new HttpError("only allowed filed can update", 404));
     }
 
+    if (req.file) {
+      if (user.Cloudinary_Id) {
+        await cloudinary.uploader.destroy(user.Cloudinary_Id);
+      }
+
+      user.Profile_Pic = req.file.path;
+
+      user.Cloudinary_Id = req.file.filename;
+    }
+
     updates.forEach((update) => {
       user[update] = req.body[update];
     });
