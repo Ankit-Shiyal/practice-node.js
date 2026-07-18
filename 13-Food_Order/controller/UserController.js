@@ -15,19 +15,17 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
-      Profile_Pic:req.file?.path,
-      Cloudinary_Id:req.file.filename,
+      Profile_Pic: req.file?.path,
+      Cloudinary_Id: req.file.filename,
     });
 
     await newUser.save();
- 
+
     res.status(201).json({ success: true, message: "new User added", newUser });
   } catch (error) {
     next(new HttpError(error.message, 500));
   }
 };
-
-
 
 // login user
 const login = async (req, res, next) => {
@@ -70,6 +68,8 @@ const deleteUser = async (req, res, next) => {
   try {
     const user = req.user;
 
+    await cloudinary.uploader.destroy(user.Cloudinary_Id);
+
     await user.deleteOne();
 
     res
@@ -83,7 +83,6 @@ const deleteUser = async (req, res, next) => {
 // update user
 const updateUser = async (req, res, next) => {
   try {
-
     const user = req.user;
 
     const updates = Object.keys(req.body);
@@ -113,7 +112,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-// update logout
+// logout
 const logout = async (req, res, next) => {
   try {
     const user = req.user;
