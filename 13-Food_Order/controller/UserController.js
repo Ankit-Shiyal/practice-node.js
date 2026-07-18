@@ -83,6 +83,7 @@ const deleteUser = async (req, res, next) => {
 // update user
 const updateUser = async (req, res, next) => {
   try {
+
     const user = req.user;
 
     const updates = Object.keys(req.body);
