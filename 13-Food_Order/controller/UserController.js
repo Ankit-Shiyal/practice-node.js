@@ -174,6 +174,60 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+
+// admin update customer 
+const adminUpdateUser = async (req, res, next) => {
+  try {
+    const user = await modelUser.findById(req.params.id);
+
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+
+    const updates = Object.keys(req.body);
+
+    const allowedFields = [
+      "Name",
+      "Email",
+      "Address",
+      "Phone",
+      "Role"
+    ];
+
+    const isValid = updates.every(field =>
+      allowedFields.includes(field)
+    );
+
+    if (!isValid) {
+      return next(new HttpError("Invalid update field", 400));
+    }
+
+    if (req.file) {
+      if (user.Cloudinary_Id) {
+        await cloudinary.uploader.destroy(user.Cloudinary_Id);
+      }
+
+      user.Profile_Pic = req.file.path;
+      user.Cloudinary_Id = req.file.filename;
+    }
+
+    updates.forEach(field => {
+      user[field] = req.body[field];
+    });
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      user,
+    });
+
+  } catch (error) {
+    next(new HttpError(error.message, 500));
+  }
+};
+
 export default {
   add,
   getAllUser,
@@ -183,4 +237,5 @@ export default {
   logoutAll,
   deleteUser,
   updateUser,
+  adminUpdateUser
 };

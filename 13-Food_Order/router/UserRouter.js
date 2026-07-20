@@ -32,4 +32,13 @@ router.get("/logoutUser", auth, UserController.logout);
 router.get("/allLogout", auth, UserController.logoutAll);
 router.get("/allUser", auth, checkRole("admin"), UserController.getAllUser);
 
+
+router.patch(
+  "/update/:id",
+  auth,
+  checkRole("admin"),
+  upload.single("Profile_Pic"),
+  UserController.adminUpdateUser
+);
+
 export default router;
