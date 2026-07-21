@@ -144,9 +144,9 @@ const updateUser = async (req, res, next) => {
     const updates = Object.keys(req.body);
 
     
-    const allowedFiled = ["Name", "Address", "Phone"];
+    let allowedFiled = ["Name", "Address", "Phone"];
 
-      if (req.user.role === "admin") {
+      if (req.user.Role === "admin") {
       allowedFiled = [...allowedFiled, "isVerified"];
     }
 
