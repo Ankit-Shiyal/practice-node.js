@@ -40,7 +40,7 @@ export const registerSchema = Joi.object({
 export const updateUserSchema = registerSchema
   .fork(["Name", "Address", "Phone"], (fields) => fields.optional())
   .fork(["Role", "Email"], (fields) => fields.forbidden())
-  .or("Name", "Address", "Phone", "Password")
+  .or("Name", "Address", "Phone" )
   .messages({
     "object.missing":
       "Name, Address, Phone and Password  any one required to update ",
