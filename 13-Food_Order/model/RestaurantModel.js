@@ -1,0 +1,53 @@
+import mongoose from "mongoose";
+
+const RestaurantSchema = await mongoose.Schema(
+  {
+    RestaurantName: {
+      type: String,
+      required: true,
+    },
+    Address: {
+      type: String,
+      required: true,
+    },
+    Phone: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    openTime: {
+      type: String,
+      required: true,
+    },
+    closeTime: {
+      type: String,
+      required: true,
+    },
+    owner: {
+      types:mongoose.Schema.Types.ObjectId,
+    },
+    RestaurantImage: {
+      type: String,
+      required: true,
+    },
+    Cloudinary_Id: {
+      type: String,
+    },
+  },
+  { timestamps: true },
+);
+
+const RestaurantModel = mongoose.model("Restaurant", RestaurantSchema);
+
+export default RestaurantModel;
