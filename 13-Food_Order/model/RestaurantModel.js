@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const RestaurantSchema = await mongoose.Schema(
+const RestaurantSchema = new mongoose.Schema(
   {
     RestaurantName: {
       type: String,
@@ -35,7 +35,8 @@ const RestaurantSchema = await mongoose.Schema(
       required: true,
     },
     owner: {
-      types:mongoose.Schema.Types.ObjectId,
+      type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
     },
     RestaurantImage: {
       type: String,

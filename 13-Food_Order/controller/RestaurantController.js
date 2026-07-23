@@ -12,6 +12,7 @@ const add = async (req, res, next) => {
       city,
       openTime,
       closeTime,
+      owner,
     } = req.body;
 
     const newRestaurant = await RestaurantModel({
@@ -23,8 +24,10 @@ const add = async (req, res, next) => {
       city,
       openTime,
       closeTime,
+      owner:req.user._id,
       RestaurantImage: req.file?.path || null,
       Cloudinary_Id: req.file.filename || null,
+
     });
 
     await newRestaurant.save();
