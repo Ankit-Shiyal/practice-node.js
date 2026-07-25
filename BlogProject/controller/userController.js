@@ -118,7 +118,7 @@ const getAllUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-     const targetedUser = req.params.id || req.user._id;
+    const targetedUser = req.params.id || req.user._id;
 
     const user = await modelUser.findById(targetedUser);
 
@@ -143,10 +143,9 @@ const updateUser = async (req, res, next) => {
 
     const updates = Object.keys(req.body);
 
-    
     let allowedFiled = ["Name", "Address", "Phone"];
 
-      if (req.user.Role === "admin") {
+    if (req.user.Role === "admin") {
       allowedFiled = [...allowedFiled, "isVerified"];
     }
 
@@ -182,7 +181,6 @@ const updateUser = async (req, res, next) => {
     next(new HttpError(error.message));
   }
 };
-
 
 export default {
   add,

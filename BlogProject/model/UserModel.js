@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
 // mongoose schema
 const userScheme = new mongoose.Schema(
   {
@@ -40,13 +39,12 @@ const userScheme = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    Profile_Pic:{
-      type:String
+    Profile_Pic: {
+      type: String,
     },
-    Cloudinary_Id:{
-      type:String
-    }
-    ,
+    Cloudinary_Id: {
+      type: String,
+    },
     isVerified: {
       type: Boolean,
       default: false,
@@ -121,32 +119,54 @@ userScheme.methods.generateAuthToken = async function () {
   }
 };
 
-
 userScheme.methods.toJSON = function () {
-
-
   const user = this;
 
-//   console.log("user", user)
+  //   console.log("user", user)
 
   const userObject = user.toObject();
 
-
-//   console.log("userObject", userObject)
+  //   console.log("userObject", userObject)
 
   delete userObject.Password;
 
   delete userObject.tokens;
 
-  delete userObject.__v
+  delete userObject.__v;
 
-  delete userObject.createdAt
+  delete userObject.createdAt;
 
-  delete userObject.updatedAt
+  delete userObject.updatedAt;
 
-  return userObject
+  return userObject;
+};
 
-}
+
+
+
+
+
+// userScheme.methods.toJSON = function () {
+//   const user = this;
+
+//   //   console.log("user", user)
+
+//   const userObject = user.toObject();
+
+//   //   console.log("userObject", userObject)
+
+//   delete userObject.Password;
+
+//   delete userObject.tokens;
+
+//   delete userObject.__v;
+
+//   delete userObject.createdAt;
+
+//   delete userObject.updatedAt;
+
+//   return userObject;
+// };
 
 const modelUser = mongoose.model("user", userScheme);
 

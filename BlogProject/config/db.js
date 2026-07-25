@@ -1,5 +1,3 @@
-
-
 import mongoose from "mongoose";
 
 async function connectDB() {
@@ -14,5 +12,4 @@ async function connectDB() {
   }
 }
 
-
-export default connectDB
+export default connectDB;

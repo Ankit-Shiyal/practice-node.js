@@ -12,7 +12,12 @@ import { updateUserSchema } from "../validation/UserSchema.js";
 // router
 const router = express.Router();
 
-router.delete("/delete/:id", auth,checkRole("admin"), UserController.deleteUser)
+router.delete(
+  "/delete/:id",
+  auth,
+  checkRole("admin"),
+  UserController.deleteUser,
+);
 
 router.patch(
   "/update/:id",
@@ -22,4 +27,4 @@ router.patch(
   UserController.updateUser,
 );
 
-export default router
+export default router;
