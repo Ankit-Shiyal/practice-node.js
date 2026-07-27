@@ -62,6 +62,8 @@ const userScheme = new mongoose.Schema(
   },
   {
     timestamps: true,
+     toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   },
 );
 
@@ -120,6 +122,15 @@ userScheme.methods.generateAuthToken = async function () {
     throw new Error(error.message);
   }
 };
+
+
+
+
+userScheme.virtual("Restaurants", {
+  ref: "Restaurant",    
+  localField: "_id",      
+  foreignField: "owner",  
+});
 
 
 userScheme.methods.toJSON = function () {

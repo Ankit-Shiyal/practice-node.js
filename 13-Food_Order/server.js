@@ -12,6 +12,7 @@ import UserRouter from "./router/UserRouter.js";
 import adminRouter from "./router/adminRouter.js";
 import RestaurantRouter from "./router/RestaurantRouter.js";
 import RestaurantModel from "./model/RestaurantModel.js";
+import modelUser from "./model/UserModel.js";
 
 const app = express();
 
@@ -78,3 +79,18 @@ serverStart();
 // }
 
 // relationship();
+
+
+// async function virtualRelationship() {
+//   try {
+//     const user = await modelUser
+//       .findById("6a61ccef82314df1c84237b7")
+//       .populate("Restaurants");
+
+//     console.log(user);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
+
+// virtualRelationship();
