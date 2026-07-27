@@ -48,10 +48,8 @@ const deleteRestaurant = async (req, res, next) => {
 
     const Restaurant = await RestaurantModel.findById(targetedUser);
 
-    if (req.file) {
-      if (user.Cloudinary_Id) {
-        await cloudinary.uploader.destroy(user.Cloudinary_Id);
-      }
+    if (user.Cloudinary_Id) {
+      await cloudinary.uploader.destroy(Restaurant.Cloudinary_Id);
     }
 
     await Restaurant.deleteOne();
@@ -64,4 +62,57 @@ const deleteRestaurant = async (req, res, next) => {
   }
 };
 
-export default { add, deleteRestaurant };
+const updateRestaurant = async (req, res, next) => {
+  try {
+    const restaurant = await RestaurantModel.findById(req.params.id);
+
+    if (!restaurant) {
+      return next(new HttpError("Restaurant not found", 404));
+    }
+
+    const updates = Object.keys(req.body);
+
+    const allowedFields = [
+      "RestaurantName",
+      "Address",
+      "Phone",
+      "description",
+      "state",
+      "city",
+      "openTime",
+      "closeTime",
+    ];
+
+    const isValidUpdate = updates.every((field) =>
+      allowedFields.includes(field)
+    );
+
+    if (!isValidUpdate) {
+      return next(new HttpError("Only allowed fields can be updated", 400));
+    }
+    if (req.file) {
+      if (restaurant.Cloudinary_Id) {
+        await cloudinary.uploader.destroy(restaurant.Cloudinary_Id);
+      }
+
+      restaurant.RestaurantImage = req.file.path;
+      restaurant.Cloudinary_Id = req.file.filename;
+    }
+
+    updates.forEach((field) => {
+      restaurant[field] = req.body[field];
+    });
+
+    await restaurant.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Restaurant updated successfully",
+      restaurant,
+    });
+  } catch (error) {
+    next(new HttpError(error.message, 500));
+  }
+};
+
+export default { add, deleteRestaurant, updateRestaurant };

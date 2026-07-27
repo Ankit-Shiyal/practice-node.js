@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import RestaurantController from "../controller/RestaurantController.js";
 import checkRole from "../middleware/checkRole.js";
 import upload from "../middleware/upload.js";
-import {restaurantSchema} from "../validation/RestaurantSchema.js";
+import { restaurantSchema } from "../validation/RestaurantSchema.js";
 import validate from "../middleware/validate.js";
 
 const router = express.Router();
@@ -19,6 +19,19 @@ router.post(
   RestaurantController.add,
 );
 
-router.delete("/deleteRes/:id", auth, checkRole("admin") , RestaurantController.deleteRestaurant)
+router.delete(
+  "/deleteRes/:id",
+  auth,
+  checkRole("admin"),
+  RestaurantController.deleteRestaurant,
+);
+
+router.patch(
+  "/updateRes/:id",
+  auth,
+  checkRole("admin"),
+  upload.single("RestaurantImage"),
+  RestaurantController.updateRestaurant,
+);
 
 export default router;
