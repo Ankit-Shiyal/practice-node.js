@@ -66,15 +66,15 @@ async function serverStart() {
 
 serverStart();
 
-async function relationship() {
-  try {
-    const restaurantData = await RestaurantModel.findById(
-      "6a61ce966244e404b137047e",
-    ).populate("owner");
-    console.log(restaurantData);
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+// async function relationship() {
+//   try {
+//     const restaurantData = await RestaurantModel.findById(
+//       "6a61ce966244e404b137047e",
+//     ).populate("owner");
+//     console.log(restaurantData);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 
-relationship();
+// relationship();

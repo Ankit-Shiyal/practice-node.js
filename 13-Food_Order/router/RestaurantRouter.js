@@ -19,4 +19,6 @@ router.post(
   RestaurantController.add,
 );
 
+router.delete("/deleteRes/:id", auth, checkRole("admin") , RestaurantController.deleteRestaurant)
+
 export default router;
