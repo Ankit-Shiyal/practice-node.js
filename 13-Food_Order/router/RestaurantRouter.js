@@ -34,4 +34,11 @@ router.patch(
   RestaurantController.updateRestaurant,
 );
 
+router.get(
+  "/allRestaurants",
+  auth,
+  checkRole("admin"),
+  RestaurantController.getAllRestaurants,
+);
+
 export default router;

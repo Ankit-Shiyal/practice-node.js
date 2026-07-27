@@ -115,4 +115,20 @@ const updateRestaurant = async (req, res, next) => {
   }
 };
 
-export default { add, deleteRestaurant, updateRestaurant };
+
+const getAllRestaurants = async (req, res, next) => {
+  try {
+    const restaurants = await RestaurantModel.find();
+
+    res.status(200).json({
+      success: true,
+      message:"all restaurant data",
+      count: restaurants.length,
+      restaurants,
+    });
+  } catch (error) {
+    next(new HttpError(error.message, 500));
+  }
+};
+
+export default { add, deleteRestaurant, updateRestaurant, getAllRestaurants };
