@@ -94,16 +94,20 @@ async function relationshipUser() {
 
 relationshipUser();
 
-// async function virtualRelationship() {
+// async function virtualUser() {
+
 //   try {
+
 //     const user = await modelUser
+
 //       .findById("6a61ccef82314df1c84237b7")
 //       .populate("Restaurants");
 
 //     console.log(user);
+
 //   } catch (error) {
 //     console.log(error.message);
 //   }
 // }
 
-// virtualRelationship();
+// virtualUser();
