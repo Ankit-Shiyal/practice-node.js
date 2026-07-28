@@ -67,6 +67,8 @@ async function serverStart() {
 
 serverStart();
 
+// manually using RestaurantModel
+
 // async function relationship() {
 //   try {
 //     const restaurantData = await RestaurantModel.findById(
@@ -80,10 +82,12 @@ serverStart();
 
 // relationship();
 
+// manually using User model
+
 async function relationshipUser() {
   try {
     const userData = await modelUser
-      .findById("6a61ccef82314df1c84237b7")
+      .findById("6a686feeddb0d1364ef39511")
       .populate("restaurant");
 
     console.log(userData);
@@ -93,6 +97,8 @@ async function relationshipUser() {
 }
 
 relationshipUser();
+
+// virtual
 
 // async function virtualUser() {
 

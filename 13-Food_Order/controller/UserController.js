@@ -3,10 +3,20 @@ import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
 
+import RestaurantModel from "../model/RestaurantModel.js";
+
 // add user
 const add = async (req, res, next) => {
   try {
-    const { Name, Email, Password, Role, Address, Phone } = req.body;
+    const { Name, Email, Password, Role, Address, Phone, restaurant } = req.body;
+
+    const restaurantData = await RestaurantModel.findById(restaurant);
+
+if (!restaurantData) {
+  return res.status(404).json({
+    message: "Restaurant not found",
+  });
+}
 
     const newUser = await modelUser({
       Name,
@@ -15,8 +25,9 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
-      Profile_Pic: req.file?.path,
-      Cloudinary_Id: req.file.filename,
+      restaurant:restaurantData._id,
+      Profile_Pic: req.file?.path || null,
+      Cloudinary_Id: req.file?.filename || null,
     });
 
     await newUser.save();

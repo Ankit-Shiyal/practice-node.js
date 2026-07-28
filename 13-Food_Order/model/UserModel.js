@@ -53,10 +53,10 @@ const userScheme = new mongoose.Schema(
       default: false,
     },
 
-    // restaurant:{
-    //   type:mongoose.Schema.Types.ObjectId,
-    //   ref:"Restaurant"
-    // },
+    restaurant:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Restaurant"
+    },
 
     tokens: [
       {
