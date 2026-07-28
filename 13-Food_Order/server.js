@@ -80,6 +80,19 @@ serverStart();
 
 // relationship();
 
+async function relationshipUser() {
+  try {
+    const userData = await modelUser
+      .findById("6a61ccef82314df1c84237b7")
+      .populate("restaurant");
+
+    console.log(userData);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+relationshipUser();
 
 // async function virtualRelationship() {
 //   try {

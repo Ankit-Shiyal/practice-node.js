@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 
+
 // mongoose schema
 const userScheme = new mongoose.Schema(
   {
@@ -51,6 +52,12 @@ const userScheme = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    // restaurant:{
+    //   type:mongoose.Schema.Types.ObjectId,
+    //   ref:"Restaurant"
+    // },
+
     tokens: [
       {
         token: {
