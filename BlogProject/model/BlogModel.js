@@ -21,7 +21,7 @@ const newBlog = new mongoose.Schema({
     type: String,
   },
   Author:{
-    type:mongoose.Schema.type.ObjectId
+    type:mongoose.Schema.Types.ObjectId
   }
 });
 
