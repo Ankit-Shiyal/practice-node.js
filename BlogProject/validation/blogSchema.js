@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-// Add Blog Validation
+
 export const addBlogSchema = Joi.object({
   BlogTitle: Joi.string().min(3).max(100).trim().required().messages({
     "string.base": "Blog title must be in string format",
@@ -26,7 +26,6 @@ export const addBlogSchema = Joi.object({
     }),
 });
 
-// Update Blog Validation
 export const updateBlogSchema = addBlogSchema
   .fork(["BlogTitle", "Content", "Category"], (field) => field.optional())
   .or("BlogTitle", "Content", "Category")

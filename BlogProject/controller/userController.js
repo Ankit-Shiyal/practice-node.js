@@ -1,9 +1,9 @@
-// local module
+
 import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
 
-// add user
+
 const add = async (req, res, next) => {
   try {
     const { Name, Email, Password, Role, Address, Phone } = req.body;
@@ -27,7 +27,7 @@ const add = async (req, res, next) => {
   }
 };
 
-// login user
+
 const login = async (req, res, next) => {
   try {
     const { Email, Password } = req.body;
@@ -51,7 +51,7 @@ const login = async (req, res, next) => {
   }
 };
 
-// auth login
+
 const authLogin = async (req, res, next) => {
   const user = req.user;
 
@@ -62,7 +62,7 @@ const authLogin = async (req, res, next) => {
     .json({ success: true, message: "auth login successfully", user });
 };
 
-// logout
+
 const logout = async (req, res, next) => {
   try {
     const user = req.user;
@@ -78,7 +78,7 @@ const logout = async (req, res, next) => {
   }
 };
 
-// logout from all dives
+
 const logoutAll = async (req, res, next) => {
   try {
     req.user.tokens = [];
@@ -94,7 +94,7 @@ const logoutAll = async (req, res, next) => {
   }
 };
 
-// get all user
+
 const getAllUser = async (req, res, next) => {
   try {
     const user = await modelUser.find({});
@@ -114,8 +114,6 @@ const getAllUser = async (req, res, next) => {
   }
 };
 
-// delete user
-
 const deleteUser = async (req, res, next) => {
   try {
     const targetedUser = req.params.id || req.user._id;
@@ -134,7 +132,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-// update user
+
 const updateUser = async (req, res, next) => {
   try {
     const targetedUser = req.params.id || req.user._id;
@@ -192,3 +190,4 @@ export default {
   deleteUser,
   updateUser,
 };
+   

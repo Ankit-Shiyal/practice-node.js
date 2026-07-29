@@ -1,9 +1,9 @@
-// external module
+
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// mongoose schema
+
 const userScheme = new mongoose.Schema(
   {
     Name: {
@@ -63,15 +63,13 @@ const userScheme = new mongoose.Schema(
   },
 );
 
-// hash Password
+
 userScheme.pre("save", async function () {
   const user = this;
   if (user.isModified("Password")) {
     user.Password = await bcrypt.hash(user.Password, 10);
   }
 });
-
-// find user for login
 
 userScheme.statics.findByCredential = async function (Email, Password) {
   try {
@@ -92,8 +90,6 @@ userScheme.statics.findByCredential = async function (Email, Password) {
     throw new Error(error.message);
   }
 };
-
-// Generate Auth Token
 
 userScheme.methods.generateAuthToken = async function () {
   try {
@@ -120,13 +116,10 @@ userScheme.methods.generateAuthToken = async function () {
 };
 
 userScheme.methods.toJSON = function () {
+  
   const user = this;
 
-  //   console.log("user", user)
-
   const userObject = user.toObject();
-
-  //   console.log("userObject", userObject)
 
   delete userObject.Password;
 
@@ -142,31 +135,6 @@ userScheme.methods.toJSON = function () {
 };
 
 
-
-
-
-
-// userScheme.methods.toJSON = function () {
-//   const user = this;
-
-//   //   console.log("user", user)
-
-//   const userObject = user.toObject();
-
-//   //   console.log("userObject", userObject)
-
-//   delete userObject.Password;
-
-//   delete userObject.tokens;
-
-//   delete userObject.__v;
-
-//   delete userObject.createdAt;
-
-//   delete userObject.updatedAt;
-
-//   return userObject;
-// };
 
 const modelUser = mongoose.model("user", userScheme);
 

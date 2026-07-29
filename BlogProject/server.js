@@ -60,26 +60,3 @@ async function serverStart() {
 }
 
 serverStart();
-
-// async function serverStart() {
-//   try {
-//     const connect = await connectDB();
-
-//     if (!connect) {
-//       return console.log("failed to connect db");
-//     }
-
-//     app.listen(port, (err) => {
-//       if (err) {
-//         return console.log(err.message);
-//       }
-
-//       console.log(`server listening on port ${port}`);
-//     });
-//   } catch (error) {
-//     console.log(error.message);
-//     process.exit(1);
-//   }
-// }
-
-// serverStart();

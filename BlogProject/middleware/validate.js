@@ -1,4 +1,4 @@
-//external module
+
 import HttpError from "./HttpError.js";
 
 const validate = (schema) => (req, res, next) => {

@@ -16,7 +16,7 @@ const BlogAdd = async (req, res, next) => {
     });
 
     await newBlog.save();
-
+     
     res.status(201).json({ success: true, message: "new Blog added", newBlog });
   } catch (error) {
     next(new HttpError(error.message, 500));
