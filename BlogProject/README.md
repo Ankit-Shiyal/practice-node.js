@@ -232,11 +232,13 @@ Authorization: Bearer YOUR_TOKEN
 
 ### Admin Update User
 
-![Admin Update](images/admin/admin-update.png)
+<img width="700"  alt="image" src="https://github.com/user-attachments/assets/4c9a6de0-2954-4a75-bf96-03ec5bf7f800" />
+
 
 ### Admin Delete User
 
-![Admin Delete](images/admin/admin-delete.png)
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/32d67c42-1b56-4a24-a650-e5071d8cd0b0" />
+
 
 ---
 
