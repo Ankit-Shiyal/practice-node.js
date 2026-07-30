@@ -246,19 +246,22 @@ Authorization: Bearer YOUR_TOKEN
 
 ### Add Blog
 
-![Add Blog](images/blog/add-blog.png)
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/f255327f-0709-41b9-8cad-fd6cf84c0a64" />
+
 
 ### Update Blog
 
-![Update Blog](images/blog/update-blog.png)
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/addaf105-5633-44f7-9d01-7f3051fb6a96" />
+
 
 ### Delete Blog
 
-![Delete Blog](images/blog/delete-blog.png)
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/dd6712a7-8cc6-4a4f-ba92-c8fb62a75008" />
+
 
 ### Get All Blogs
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/28849c4f-ef87-4d09-917d-ec2e58fa2f4e" />
 
-![All Blogs](images/blog/all-blogs.png)
 
 
 ---
