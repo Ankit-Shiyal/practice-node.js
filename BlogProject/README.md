@@ -270,8 +270,6 @@ Authorization: Bearer YOUR_TOKEN
 
 **Ankit Shiyal**
 
-GitHub:
-https://github.com/Ankit-Shiyal
 
 ---
 
