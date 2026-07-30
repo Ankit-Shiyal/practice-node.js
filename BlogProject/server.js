@@ -8,7 +8,7 @@ import connectDB from "./config/db.js";
 
 import userRouter from "./router/UserRouter.js";
 import adminRouter from "./router/adminRouter.js";
-import BlogRouter from "./router/BlogRouter.js"
+import BlogRouter from "./router/BlogRouter.js";
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
-app.use("/blog", BlogRouter)
+app.use("/blog", BlogRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "hello from server" });

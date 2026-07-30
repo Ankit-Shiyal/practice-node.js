@@ -1,6 +1,5 @@
 import Joi from "joi";
 
-
 export const addBlogSchema = Joi.object({
   BlogTitle: Joi.string().min(3).max(100).trim().required().messages({
     "string.base": "Blog title must be in string format",

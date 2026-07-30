@@ -17,5 +17,3 @@ const checkRole =
   };
 
 export default checkRole;
-
-

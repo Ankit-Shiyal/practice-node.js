@@ -1,8 +1,6 @@
-
 import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
-
 
 const add = async (req, res, next) => {
   try {
@@ -15,8 +13,8 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
-      Profile_Pic: req.file?.path,
-      Cloudinary_Id: req.file.filename,
+      Profile_Pic: req.file?.path || null,
+      Cloudinary_Id: req.file?.filename || null,
     });
 
     await newUser.save();
@@ -26,7 +24,6 @@ const add = async (req, res, next) => {
     next(new HttpError(error.message, 500));
   }
 };
-
 
 const login = async (req, res, next) => {
   try {
@@ -51,7 +48,6 @@ const login = async (req, res, next) => {
   }
 };
 
-
 const authLogin = async (req, res, next) => {
   const user = req.user;
 
@@ -61,7 +57,6 @@ const authLogin = async (req, res, next) => {
     .status(200)
     .json({ success: true, message: "auth login successfully", user });
 };
-
 
 const logout = async (req, res, next) => {
   try {
@@ -78,7 +73,6 @@ const logout = async (req, res, next) => {
   }
 };
 
-
 const logoutAll = async (req, res, next) => {
   try {
     req.user.tokens = [];
@@ -93,7 +87,6 @@ const logoutAll = async (req, res, next) => {
     next(new HttpError(error.message));
   }
 };
-
 
 const getAllUser = async (req, res, next) => {
   try {
@@ -131,7 +124,6 @@ const deleteUser = async (req, res, next) => {
     next(new HttpError(error.message));
   }
 };
-
 
 const updateUser = async (req, res, next) => {
   try {
@@ -190,4 +182,3 @@ export default {
   deleteUser,
   updateUser,
 };
-   

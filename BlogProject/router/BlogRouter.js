@@ -4,7 +4,7 @@ import BlogController from "../controller/BlogController.js";
 import auth from "../middleware/auth.js";
 import upload from "../middleware/upload.js";
 import checkRole from "../middleware/checkRole.js";
-
+import validate from "../middleware/validate.js";
 import { addBlogSchema, updateBlogSchema } from "../validation/BlogSchema.js";
 
 const router = express.Router();
@@ -28,7 +28,7 @@ router.patch(
   auth,
   upload.single("BlogImg"),
   validate(updateBlogSchema),
-  BlogController.updateBlog
+  BlogController.updateBlog,
 );
 router.get(
   "/allBlog",

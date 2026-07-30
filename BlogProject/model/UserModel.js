@@ -1,10 +1,8 @@
-
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
-const userScheme = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     Name: {
       type: String,
@@ -60,18 +58,19 @@ const userScheme = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   },
 );
 
-
-userScheme.pre("save", async function () {
+userSchema.pre("save", async function () {
   const user = this;
   if (user.isModified("Password")) {
     user.Password = await bcrypt.hash(user.Password, 10);
   }
 });
 
-userScheme.statics.findByCredential = async function (Email, Password) {
+userSchema.statics.findByCredential = async function (Email, Password) {
   try {
     const users = await this.findOne({ Email });
 
@@ -91,7 +90,7 @@ userScheme.statics.findByCredential = async function (Email, Password) {
   }
 };
 
-userScheme.methods.generateAuthToken = async function () {
+userSchema.methods.generateAuthToken = async function () {
   try {
     const user = this;
 
@@ -115,8 +114,13 @@ userScheme.methods.generateAuthToken = async function () {
   }
 };
 
-userScheme.methods.toJSON = function () {
-  
+userSchema.virtual("Blogs", {
+  ref: "blog",
+  localField: "_id",
+  foreignField: "Author",
+});
+
+userSchema.methods.toJSON = function () {
   const user = this;
 
   const userObject = user.toObject();
@@ -134,8 +138,6 @@ userScheme.methods.toJSON = function () {
   return userObject;
 };
 
-
-
-const modelUser = mongoose.model("user", userScheme);
+const modelUser = mongoose.model("user", userSchema);
 
 export default modelUser;

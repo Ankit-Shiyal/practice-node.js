@@ -10,13 +10,13 @@ const BlogAdd = async (req, res, next) => {
       BlogTitle,
       Content,
       Category,
-      BlogImg: req.file?.path || null,
-      Cloudinary_Id: req.file.filename || null,
+      BlogImg: req.file.path,
+      Cloudinary_Id: req.file.filename,
       Author: req.user._id,
     });
 
     await newBlog.save();
-     
+
     res.status(201).json({ success: true, message: "new Blog added", newBlog });
   } catch (error) {
     next(new HttpError(error.message, 500));
@@ -90,7 +90,7 @@ const updateBlog = async (req, res, next) => {
 
 const getAllBlogs = async (req, res, next) => {
   try {
-    const blogs = await BlogModel.find();
+    const blogs = await BlogModel.find().populate("Author", "-_id");
 
     res.status(200).json({
       success: true,

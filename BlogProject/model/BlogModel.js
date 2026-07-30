@@ -20,11 +20,11 @@ const newBlog = new mongoose.Schema({
   Cloudinary_Id: {
     type: String,
   },
-  Author:{
-    type:mongoose.Schema.Types.ObjectId
-  }
+  Author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
-
 
 const BlogSchema = mongoose.model("blog", newBlog);
 
