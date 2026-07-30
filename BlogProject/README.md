@@ -181,6 +181,86 @@ Authorization: Bearer YOUR_TOKEN
 
 ---
 
+
+# 📸 API Output Screenshots
+
+## 👤 User Router
+
+### User Registration
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/3091699f-b869-4cee-8983-2aab200d1fb1" />
+
+
+### User Login
+
+<img width="700"  alt="image" src="https://github.com/user-attachments/assets/e907be89-fab1-472a-a686-cf431f4aeade" />
+
+
+### Auth Login
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/f67160dd-0943-43fe-a9d2-52a7078b5c1e" />
+
+
+### Update User
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/63f95a28-c053-4af8-ae7b-1253b8b95098" />
+
+
+### Delete User
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/c4a85644-db95-4443-ba8e-4eebbf3494f6" />
+
+
+### Logout User
+
+<img width="700"  alt="image" src="https://github.com/user-attachments/assets/d4a9a7db-0e15-43fe-873f-da996e9fd893" />
+
+
+### Logout From All Devices
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/7f44322b-65ce-4885-826d-787cb03dfdd0" />
+
+
+### Get All Users
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/30606c35-4952-499e-8c47-8bf2e2359d40" />
+
+
+---
+
+## 👨‍💼 Admin Router
+
+### Admin Update User
+
+![Admin Update](images/admin/admin-update.png)
+
+### Admin Delete User
+
+![Admin Delete](images/admin/admin-delete.png)
+
+---
+
+## 📝 Blog Router
+
+### Add Blog
+
+![Add Blog](images/blog/add-blog.png)
+
+### Update Blog
+
+![Update Blog](images/blog/update-blog.png)
+
+### Delete Blog
+
+![Delete Blog](images/blog/delete-blog.png)
+
+### Get All Blogs
+
+![All Blogs](images/blog/all-blogs.png)
+
+
+---
+
 # 👨‍💻 Author
 
 **Ankit Shiyal**
