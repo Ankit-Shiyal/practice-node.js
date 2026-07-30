@@ -32,6 +32,4 @@ router.get("/logoutUser", auth, UserController.logout);
 router.get("/allLogout", auth, UserController.logoutAll);
 router.get("/allUser", auth, checkRole("admin"), UserController.getAllUser);
 
-
-
 export default router;

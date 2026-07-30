@@ -10,14 +10,6 @@ const add = async (req, res, next) => {
   try {
     const { Name, Email, Password, Role, Address, Phone, restaurant } = req.body;
 
-    const restaurantData = await RestaurantModel.findById(restaurant);
-
-if (!restaurantData) {
-  return res.status(404).json({
-    message: "Restaurant not found",
-  });
-}
-
     const newUser = await modelUser({
       Name,
       Email,
@@ -25,7 +17,6 @@ if (!restaurantData) {
       Role,
       Address,
       Phone,
-      restaurant:restaurantData._id,
       Profile_Pic: req.file?.path || null,
       Cloudinary_Id: req.file?.filename || null,
     });

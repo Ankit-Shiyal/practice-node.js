@@ -2,8 +2,6 @@ import RestaurantModel from "../model/RestaurantModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
 
-
-
 const add = async (req, res, next) => {
   try {
     const {
@@ -86,7 +84,7 @@ const updateRestaurant = async (req, res, next) => {
     ];
 
     const isValidUpdate = updates.every((field) =>
-      allowedFields.includes(field)
+      allowedFields.includes(field),
     );
 
     if (!isValidUpdate) {
@@ -117,17 +115,55 @@ const updateRestaurant = async (req, res, next) => {
   }
 };
 
-
 const getAllRestaurants = async (req, res, next) => {
   try {
-    const restaurants = await RestaurantModel.find();
+    const {
+      page = 1,
+      limit = 10,
+      isOpen,
+      search,
+      city,
+      sort = "createdAt",
+      order = "desc",
+    } = req.query;
 
-    res.status(200).json({
-      success: true,
-      message:"all restaurant data",
-      count: restaurants.length,
-      restaurants,
-    });
+    const filter = {};
+
+    if (search) {
+      filter.RestaurantName = {
+        $regex: search,
+        $options: "i",
+      };
+    }
+
+    if (city) {
+      filter.city = city;
+    }
+
+    if (isOpen !== undefined) {
+      filter.isOpen = isOpen === "true";
+    }
+
+    const totalRestaurant = await RestaurantModel.countDocuments(filter);
+
+    const restaurants = await RestaurantModel.find(filter)
+      .populate("owner", "Name Email Address -_id")
+      .skip((page - 1) * limit)
+      .lean();
+
+    if (restaurants.length === 0) {
+      res.status(404).json({ success: true, message: "restaurant not found" });
+    }
+
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "restaurant data found",
+        totalRestaurant: totalRestaurant,
+        page: page,
+        restaurants,
+      });
   } catch (error) {
     next(new HttpError(error.message, 500));
   }

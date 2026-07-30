@@ -34,6 +34,10 @@ const RestaurantSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+     isOpen: {
+      type: Boolean,
+      default: true,
+    },
     owner: {
       type:mongoose.Schema.Types.ObjectId,
         ref:"user"
