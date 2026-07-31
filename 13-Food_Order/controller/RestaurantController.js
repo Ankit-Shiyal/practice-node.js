@@ -155,15 +155,13 @@ const getAllRestaurants = async (req, res, next) => {
       res.status(404).json({ success: true, message: "restaurant not found" });
     }
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "restaurant data found",
-        totalRestaurant: totalRestaurant,
-        page: page,
-        restaurants,
-      });
+    res.status(200).json({
+      success: true,
+      message: "restaurant data found",
+      totalRestaurant: totalRestaurant,
+      page: page,
+      restaurants,
+    });
   } catch (error) {
     next(new HttpError(error.message, 500));
   }
