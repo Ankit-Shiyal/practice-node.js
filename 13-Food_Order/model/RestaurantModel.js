@@ -1,3 +1,5 @@
+// restaurantModel
+
 import mongoose from "mongoose";
 
 const RestaurantSchema = new mongoose.Schema(
@@ -34,13 +36,13 @@ const RestaurantSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-     isOpen: {
+    isOpen: {
       type: Boolean,
       default: true,
     },
     owner: {
-      type:mongoose.Schema.Types.ObjectId,
-        ref:"user"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
     },
     RestaurantImage: {
       type: String,

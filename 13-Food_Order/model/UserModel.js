@@ -1,3 +1,5 @@
+// userModel
+
 // external module
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";

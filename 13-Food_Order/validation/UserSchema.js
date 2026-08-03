@@ -1,4 +1,6 @@
-// // external module
+//userSchema
+
+// external module
 import Joi from "joi";
 
 // validation
@@ -35,20 +37,16 @@ export const registerSchema = Joi.object({
         "Phone number must be a valid 10-digit Indian mobile number",
       "any.required": "Phone is required",
     }),
-     restaurant: Joi.string()
-    .hex()
-    .length(24)
-    .optional()
-    .messages({
-      "string.hex": "Invalid Restaurant Id",
-      "string.length": "Restaurant Id must be 24 characters",
-    }),
+  restaurant: Joi.string().hex().length(24).optional().messages({
+    "string.hex": "Invalid Restaurant Id",
+    "string.length": "Restaurant Id must be 24 characters",
+  }),
 });
 
 export const updateUserSchema = registerSchema
   .fork(["Name", "Address", "Phone"], (fields) => fields.optional())
   .fork(["Role", "Email"], (fields) => fields.forbidden())
-  .or("Name", "Address", "Phone" )
+  .or("Name", "Address", "Phone")
   .messages({
     "object.missing":
       "Name, Address, Phone and Password  any one required to update ",

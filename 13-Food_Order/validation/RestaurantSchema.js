@@ -1,3 +1,5 @@
+// restaurantSchema
+
 // external module
 import Joi from "joi";
 
@@ -52,8 +54,4 @@ export const restaurantSchema = Joi.object({
     "string.base": "Close Time must be in string format",
     "any.required": "Close Time is required",
   }),
-
-  
 });
-
-

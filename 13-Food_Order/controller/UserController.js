@@ -1,3 +1,5 @@
+// userController
+
 // local module
 import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
@@ -8,7 +10,8 @@ import RestaurantModel from "../model/RestaurantModel.js";
 // add user
 const add = async (req, res, next) => {
   try {
-    const { Name, Email, Password, Role, Address, Phone, restaurant } = req.body;
+    const { Name, Email, Password, Role, Address, Phone, restaurant } =
+      req.body;
 
     const newUser = await modelUser({
       Name,
@@ -120,7 +123,7 @@ const getAllUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-     const targetedUser = req.params.id || req.user._id;
+    const targetedUser = req.params.id || req.user._id;
 
     const user = await modelUser.findById(targetedUser);
 
@@ -145,10 +148,9 @@ const updateUser = async (req, res, next) => {
 
     const updates = Object.keys(req.body);
 
-    
     let allowedFiled = ["Name", "Address", "Phone"];
 
-      if (req.user.Role === "admin") {
+    if (req.user.Role === "admin") {
       allowedFiled = [...allowedFiled, "isVerified"];
     }
 
@@ -184,7 +186,6 @@ const updateUser = async (req, res, next) => {
     next(new HttpError(error.message));
   }
 };
-
 
 export default {
   add,

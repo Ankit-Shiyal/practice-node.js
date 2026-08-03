@@ -1,3 +1,6 @@
+
+// auth
+
 import jwt from "jsonwebtoken";
 
 import HttpError from "./HttpError.js";
