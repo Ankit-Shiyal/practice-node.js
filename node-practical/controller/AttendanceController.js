@@ -37,7 +37,7 @@ const TodayAttendance = async (req, res, next) => {
         $gte: start,
         $lte: end,
       },
-    }).populate("Attendances");
+    })
     res.status(200).json({
       success: true,
       attendance,
