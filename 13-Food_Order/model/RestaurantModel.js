@@ -51,6 +51,10 @@ const RestaurantSchema = new mongoose.Schema(
     Cloudinary_Id: {
       type: String,
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
