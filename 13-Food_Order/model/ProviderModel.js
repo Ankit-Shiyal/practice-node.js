@@ -4,12 +4,12 @@ import mongoose from "mongoose";
 const providerSchema = new mongoose.Schema({
   providerName: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
+    ref: "user",
     required: true,
   },
   restaurantName: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: restaurant,
+    ref: "Restaurant",
     required: true,
   },
   document: {
