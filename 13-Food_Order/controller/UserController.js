@@ -102,17 +102,52 @@ const logoutAll = async (req, res, next) => {
 // get all user
 const getAllUser = async (req, res, next) => {
   try {
-    const user = await modelUser.find({});
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      Address,
+      sort = "createdAt",
+      order = "desc",
+    } = req.query;
 
-    if (user.length === 0) {
-      return next(new HttpError("User data not found", 404));
+    page = Number(page);
+
+    limit = Number(limit);
+
+    const filter = {};
+
+    if (search) {
+      filter.Name = {
+        $regex: search,
+        $options: "i",
+      };
+    }
+
+    if (Address) {
+      filter.Address = Address;
+    }
+
+    const totalUser = await modelUser.countDocuments(filter);
+
+    const users = await modelUser
+      .find(filter)
+      .skip((page - 1) * limit)
+      .lean()
+      .limit(limit);
+
+    if (users.length === 0) {
+      res.status(404).json({ success: true, message: "user not found" });
     }
 
     res.status(200).json({
       success: true,
-      message: "All user data",
-      Total: user.length,
-      user,
+      message: "user data found",
+      totalUser: totalUser,
+      page: page,
+      users,
+      totalPages: Math.ceil(totalUser / limit),
+      CurrentPage: page,
     });
   } catch (error) {
     next(new HttpError(error.message, 500));
