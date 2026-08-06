@@ -1,28 +1,42 @@
 import providerModel from "../model/ProviderModel.js";
 import HttpError from "../middleware/HttpError.js";
-
+import modelUser from "../model/UserModel.js";
 
 const addProvider = async (req, res, next) => {
   try {
-    const { providerName, restaurantName, bankNumber } = req.body;
+    const userId = req.user._id;
+
+    const user = await modelUser.findById(userId);
+
+    if (!user) {
+      return next(new HttpError("user not found", 404));
+    }
+
+    const existingProvider = await providerModel.findById(userId);
+
+    if (existingProvider) {
+      return next(
+        new HttpError("already provider registered with this id", 500),
+      );
+    }
+    const { restaurantName, bankNumber } = req.body;
+
 
     const newProvider = new providerModel({
-      providerName,
+      providerName: req.user._id,
       restaurantName,
       bankNumber,
       document: req.file?.path || null,
       Cloudinary_Id: req.file?.filename || null,
     });
 
+    modelUser.Role = "provider";
     await newProvider.save();
 
     const provider = await providerModel
       .findById(newProvider._id)
       .populate("providerName", "Name Email")
-      .populate(
-        "restaurantName",
-        "RestaurantName Address Phone city state"
-      );
+      .populate("restaurantName", "RestaurantName Address Phone city state");
 
     res.status(201).json({
       success: true,
@@ -33,6 +47,5 @@ const addProvider = async (req, res, next) => {
     next(new HttpError(error.message, 500));
   }
 };
-
 
 export default { addProvider };
