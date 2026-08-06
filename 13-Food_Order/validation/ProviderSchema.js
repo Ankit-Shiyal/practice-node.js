@@ -1,3 +1,8 @@
+
+
+import Joi from 'joi';
+
+
 export const updateProviderSchema = Joi.object({
   restaurantName: Joi.string().max(25).messages({
     "string.max": "Restaurant Id must be 25 characters",
