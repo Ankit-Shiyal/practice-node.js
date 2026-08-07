@@ -9,7 +9,7 @@ import { registerSchema } from "../validation/UserSchema.js";
 import validate from "../middleware/validate.js";
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
-import upload from "../middleware/upload.js";
+import {profilePic} from "../middleware/upload.js";
 import { updateUserSchema } from "../validation/UserSchema.js";
 // router
 const router = express.Router();
@@ -17,7 +17,7 @@ const router = express.Router();
 router.post(
   "/add",
   validate(registerSchema),
-  upload.single("Profile_Pic"),
+  profilePic.single("Profile_Pic"),
   UserController.add,
 );
 router.post("/userLogin", UserController.login);
@@ -26,7 +26,7 @@ router.delete("/delete", auth, UserController.deleteUser);
 router.patch(
   "/update",
   auth,
-  upload.single("Profile_Pic"),
+  profilePic.single("Profile_Pic"),
   validate(updateUserSchema),
   UserController.updateUser,
 );

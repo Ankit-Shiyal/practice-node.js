@@ -31,32 +31,69 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 // export default upload;
 
-const createUpload = ({
+const createUploads = ({
   folder,
-  formats,
-  mimeTypes = [],
-  transformation,
-  filesize = 5 * 1024 * 1024,
+  transformation = [],
   resource_type = "auto",
+  fileSize = 1024 * 1024 * 5,
+  allowed_formats = [],
+  mimetype = [],
 }) => {
   const storage = new CloudinaryStorage({
     cloudinary,
-    params: async (req, file) => ({
-      folder,
-      allowed_formats: formats,
-      transformation,
-    }),
+    params: async (req, file) => {
+      return {
+        folder,
+        transformation,
+        allowed_formats,
+        resource_type,
+      };
+    },
   });
 
   return multer({
     storage,
-    limits: { filesize },
+    limits: { fileSize },
     fileFilter: (req, file, cb) => {
-      if (mimeTypes.length === 0 || mimeTypes.includes(file.mimetype)) {
-        cb(null, true);
+      if (mimetype.length && !mimetype.includes(file.mimetype)) {
+        return cb(
+          new Error(
+            `invalid file type, Allowed types: ${mimetype.join(", ")} `,
+          ),
+          false,
+        );
       } else {
-        cb(new Error("file format is not valid"), false);
+        cb(null, true);
       }
     },
   });
 };
+
+export const profilePic = createUploads({
+  folder: "13-food_order/Profile_Pic",
+  transformation: [
+    { height: "800", width: "800", crop: "limit" },
+    { fetch_format: "webp" },
+    { quality: "auto" },
+  ],
+  allowed_formats: ["jpeg", "jpg", "png", "webp"],
+  mimetype: ["image/jpeg", "image/png", "image/jpg", "image/webp"],
+});
+
+export const RestaurantImage = createUploads({
+  folder: "13-food_order/RestaurantImage",
+  transformation: [
+    { height: "800", width: "800", crop: "limit" },
+    { fetch_format: "webp" },
+    { quality: "auto" },
+  ],
+  allowed_formats: ["jpeg", "jpg", "png", "webp"],
+  mimetype: ["image/jpeg", "image/png", "image/jpg", "image/webp"],
+});
+
+export const document = createUploads({
+  folder: "13-food_order/document",
+  resource_type: "raw",
+  allowed_formats: ["pdf"],
+  mimetype: ["application/pdf"],
+});

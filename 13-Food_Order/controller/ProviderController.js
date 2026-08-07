@@ -26,8 +26,8 @@ const addProvider = async (req, res, next) => {
       providerName: req.user._id,
       restaurantName,
       bankNumber,
-      document: req.file?.path || null,
-      Cloudinary_Id: req.file?.filename || null,
+      document: req.files.map((file) => file.path),
+      Cloudinary_Id: req.files.map((file) => file.filename),
     });
 
     modelUser.Role = "provider";

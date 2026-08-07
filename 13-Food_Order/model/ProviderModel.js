@@ -12,13 +12,13 @@ const providerSchema = new mongoose.Schema({
     ref: "Restaurant",
     required: true,
   },
-  document: {
+  document:[ {
     type: String,
     required: true,
-  },
-  Cloudinary_Id: {
+  }],
+  Cloudinary_Id:[ {
     type: String,
-  },
+  }],
   isVerified: {
     type: Boolean,
     default: false,
