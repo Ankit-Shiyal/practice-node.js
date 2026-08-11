@@ -18,7 +18,7 @@ router.post(
 );
 
 router.patch(
-  "/providerUpdate",
+  "/providerUpdate/:id",
   auth,
   checkRole("admin"),
   document.array("document", 3),
@@ -26,7 +26,7 @@ router.patch(
 );
 
 router.delete(
-  "/providerDelete",
+  "/providerDelete/:id",
   auth,
   checkRole("admin"),
   ProviderController.deleteProvider,
