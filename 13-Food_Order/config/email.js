@@ -15,3 +15,4 @@ const emailSetUp = nodemailer.createTransport({
 
 
 export default emailSetUp
+
