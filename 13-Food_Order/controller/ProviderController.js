@@ -2,36 +2,48 @@ import providerModel from "../model/ProviderModel.js";
 import HttpError from "../middleware/HttpError.js";
 import modelUser from "../model/UserModel.js";
 
+import sendEmail from "../utils/sendEmail.js";
+import { getWelcomeEmailTemplate } from "../template/emailTemplate.js";
+
 const addProvider = async (req, res, next) => {
   try {
     const userId = req.user._id;
-
     const user = await modelUser.findById(userId);
 
     if (!user) {
       return next(new HttpError("user not found", 404));
     }
-
-    const existingProvider = await providerModel.findById(userId);
+    const existingProvider = await providerModel.findOne({
+      providerName: userId,
+    });
 
     if (existingProvider) {
       return next(
-        new HttpError("already provider registered with this id", 500),
+        new HttpError("Already provider registered with this user", 400),
       );
     }
+
     const { restaurantName, bankNumber } = req.body;
 
-
     const newProvider = new providerModel({
-      providerName: req.user._id,
+      providerName: userId,
       restaurantName,
       bankNumber,
-      document: req.files.map((file) => file.path),
-      Cloudinary_Id: req.files.map((file) => file.filename),
+      document: req.files?.map((file) => file.path),
+      Cloudinary_Id: req.files?.map((file) => file.filename),
     });
 
-    modelUser.Role = "provider";
     await newProvider.save();
+
+    user.Role = "provider";
+
+    await user.save();
+
+    await sendEmail({
+      to: user.Email,
+      subject: "Welcome to Eat&Joy - Provider Account 👨‍🍳",
+      html: getWelcomeEmailTemplate(user.Name, "provider"),
+    });
 
     const provider = await providerModel
       .findById(newProvider._id)
@@ -40,7 +52,7 @@ const addProvider = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "New provider added",
+      message: "New provider added and welcome email sent",
       provider,
     });
   } catch (error) {

@@ -1,8 +1,9 @@
-// restaurantController
-
 import RestaurantModel from "../model/RestaurantModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
+
+import sendEmail from "../utils/sendEmail.js";
+import { getWelcomeEmailTemplate } from "../template/emailTemplate.js";
 
 const add = async (req, res, next) => {
   try {
@@ -15,10 +16,13 @@ const add = async (req, res, next) => {
       city,
       openTime,
       closeTime,
-      owner,
     } = req.body;
 
-    const newRestaurant = await RestaurantModel({
+    if (!req.user) {
+      return next(new HttpError("Please authenticate", 401));
+    }
+
+    const newRestaurant = new RestaurantModel({
       RestaurantName,
       Address,
       Phone,
@@ -29,21 +33,31 @@ const add = async (req, res, next) => {
       closeTime,
       owner: req.user._id,
       RestaurantImage: req.file?.path || null,
-      Cloudinary_Id: req.file.filename || null,
+      Cloudinary_Id: req.file?.filename || null,
     });
 
     await newRestaurant.save();
 
+    await sendEmail({
+      to: req.user.Email,
+      subject: "Restaurant Added Successfully - Eat&Joy 🏪",
+      html: getWelcomeEmailTemplate(
+        newRestaurant.RestaurantName,
+        "restaurant"
+      ),
+    });
+
     res.status(201).json({
       success: true,
-      message: "newRestaurant added successfully",
+      message: "Restaurant added successfully and email sent",
       newRestaurant,
     });
+
   } catch (error) {
+    console.log("Restaurant Add Error:", error);
     next(new HttpError(error.message, 500));
   }
 };
-
 const deleteRestaurant = async (req, res, next) => {
   try {
     const targetedUser = req.params.id;

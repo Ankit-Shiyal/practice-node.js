@@ -1,11 +1,371 @@
-export const getWelcomeEmailTemplate = (userName) => {
+export const getWelcomeEmailTemplate = (name, type) => {
+  let title;
+  let subtitle;
+  let message;
+  let icon;
+  let buttonText;
+  let buttonLink;
+
+  // USER
+  if (type === "user") {
+    title = `Welcome to Eat&Joy, ${name}! 🎉`;
+    subtitle = "Good Food. Good Mood. ❤️";
+    message = `
+      Your account has been successfully created.
+      You can now discover restaurants, explore delicious food,
+      place orders, and enjoy fast delivery right at your doorstep.
+    `;
+    icon = "🍽️";
+    buttonText = "Explore Restaurants 🍴";
+    buttonLink = "https://eatandjoy.com/restaurants";
+  }
+
+  // PROVIDER
+  else if (type === "provider") {
+    title = `Welcome to Eat&Joy, ${name}! 🎉`;
+    subtitle = "Grow your business with Eat&Joy";
+    message = `
+      Your provider account has been successfully created.
+      You can now manage your services, connect with customers,
+      and grow your business with Eat&Joy.
+    `;
+    icon = "👨‍🍳";
+    buttonText = "Go to Provider Dashboard";
+    buttonLink = "https://eatandjoy.com/provider/dashboard";
+  }
+
+  // RESTAURANT
+  else if (type === "restaurant") {
+    title = `${name} Added Successfully! 🎉`;
+    subtitle = "Welcome to Eat&Joy";
+    message = `
+      Your restaurant has been successfully added to Eat&Joy.
+      You can now manage your restaurant, add food items,
+      manage orders, and serve your customers.
+    `;
+    icon = "🏪";
+    buttonText = "Manage Restaurant";
+    buttonLink = "https://eatandjoy.com/restaurant/dashboard";
+  }
+
+  // INVALID TYPE
+  else {
+    throw new Error("Invalid email template type");
+  }
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>${title}</title>
+</head>
+
+<body style="
+  margin:0;
+  padding:0;
+  background:#f4f4f4;
+  font-family:Arial, Helvetica, sans-serif;
+  color:#333333;
+">
+
+<table
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  style="background:#f4f4f4;"
+>
+  <tr>
+    <td align="center" style="padding:25px 10px;">
+
+      <!-- Main Card -->
+      <table
+        width="600"
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        style="
+          width:100%;
+          max-width:600px;
+          background:#ffffff;
+          border-radius:12px;
+          overflow:hidden;
+        "
+      >
+
+        <!-- Header -->
+        <tr>
+          <td
+            align="center"
+            style="
+              background:#e23744;
+              padding:35px 20px;
+            "
+          >
+
+            <div style="
+              font-size:42px;
+              line-height:1;
+              margin-bottom:12px;
+            ">
+              ${icon}
+            </div>
+
+            <h1 style="
+              margin:0;
+              color:#ffffff;
+              font-size:32px;
+              font-weight:700;
+            ">
+              Eat&Joy
+            </h1>
+
+            <p style="
+              margin:10px 0 0;
+              color:#ffffff;
+              font-size:14px;
+            ">
+              ${subtitle}
+            </p>
+
+          </td>
+        </tr>
+
+
+        <!-- Content -->
+        <tr>
+          <td style="padding:40px 35px 25px;">
+
+            <h2 style="
+              margin:0 0 18px;
+              font-size:25px;
+              color:#222222;
+            ">
+              ${title}
+            </h2>
+
+            <p style="
+              margin:0 0 20px;
+              font-size:15px;
+              line-height:1.7;
+              color:#555555;
+            ">
+              Hello <strong>${name}</strong>,
+            </p>
+
+            <p style="
+              margin:0;
+              font-size:15px;
+              line-height:1.8;
+              color:#555555;
+            ">
+              ${message}
+            </p>
+
+
+            <!-- Success Box -->
+            <table
+              width="100%"
+              cellpadding="0"
+              cellspacing="0"
+              border="0"
+              style="
+                margin:30px 0;
+                background:#fff5f5;
+                border-radius:10px;
+                border:1px solid #ffe1e1;
+              "
+            >
+              <tr>
+                <td
+                  align="center"
+                  style="padding:25px;"
+                >
+
+                  <div style="
+                    font-size:38px;
+                    margin-bottom:10px;
+                  ">
+                    ✅
+                  </div>
+
+                  <h3 style="
+                    margin:0 0 8px;
+                    color:#e23744;
+                    font-size:18px;
+                  ">
+                    Successfully Added
+                  </h3>
+
+                  <p style="
+                    margin:0;
+                    font-size:14px;
+                    line-height:1.6;
+                    color:#666666;
+                  ">
+                    Your ${type} is now successfully registered
+                    with Eat&Joy.
+                  </p>
+
+                </td>
+              </tr>
+            </table>
+
+
+            <!-- CTA -->
+            <table
+              width="100%"
+              cellpadding="0"
+              cellspacing="0"
+              border="0"
+            >
+              <tr>
+                <td align="center">
+
+                  <a
+                    href="${buttonLink}"
+                    style="
+                      display:inline-block;
+                      background:#e23744;
+                      color:#ffffff;
+                      text-decoration:none;
+                      padding:15px 32px;
+                      border-radius:7px;
+                      font-size:15px;
+                      font-weight:bold;
+                    "
+                  >
+                    ${buttonText}
+                  </a>
+
+                </td>
+              </tr>
+            </table>
+
+
+            <!-- Support -->
+            <p style="
+              margin:30px 0 0;
+              padding-top:25px;
+              border-top:1px solid #eeeeee;
+              font-size:13px;
+              line-height:1.7;
+              color:#777777;
+            ">
+              Need help? Our support team is always here for you.
+              Contact us at
+              <a
+                href="mailto:support@eatandjoy.com"
+                style="
+                  color:#e23744;
+                  text-decoration:none;
+                  font-weight:bold;
+                "
+              >
+                support@eatandjoy.com
+              </a>
+            </p>
+
+          </td>
+        </tr>
+
+
+        <!-- Footer -->
+        <tr>
+          <td
+            align="center"
+            style="
+              background:#f8f8f8;
+              padding:25px 20px;
+              border-top:1px solid #eeeeee;
+            "
+          >
+
+            <p style="
+              margin:0 0 8px;
+              font-size:12px;
+              color:#888888;
+            ">
+              © 2026 Eat&Joy. All rights reserved.
+            </p>
+
+            <p style="
+              margin:0;
+              font-size:12px;
+              color:#999999;
+            ">
+              This email was sent by Eat&Joy.
+            </p>
+
+            <p style="
+              margin:15px 0 0;
+              font-size:12px;
+            ">
+
+              <a
+                href="#"
+                style="
+                  color:#e23744;
+                  text-decoration:none;
+                "
+              >
+                Privacy Policy
+              </a>
+
+              &nbsp; • &nbsp;
+
+              <a
+                href="#"
+                style="
+                  color:#e23744;
+                  text-decoration:none;
+                "
+              >
+                Terms
+              </a>
+
+              &nbsp; • &nbsp;
+
+              <a
+                href="#"
+                style="
+                  color:#e23744;
+                  text-decoration:none;
+                "
+              >
+                Contact
+              </a>
+
+            </p>
+
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+`;
+};
+
+export const getLoginSuccessEmailTemplate = (userName) => {
   return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Eat&Joy</title>
+  <title>Login Successful - Eat&Joy</title>
 </head>
 
 <body style="
@@ -57,7 +417,7 @@ export const getWelcomeEmailTemplate = (userName) => {
                 margin:8px 0 0;
                 font-size:15px;
               ">
-                Delicious food, delivered to your door
+                Welcome Back!
               </p>
             </td>
           </tr>
@@ -71,7 +431,7 @@ export const getWelcomeEmailTemplate = (userName) => {
                 color:#222;
                 font-size:24px;
               ">
-                Welcome, ${userName}! 🎉
+                Login Successful! 🎉
               </h2>
 
               <p style="
@@ -79,9 +439,7 @@ export const getWelcomeEmailTemplate = (userName) => {
                 line-height:1.7;
                 color:#555;
               ">
-                Thank you for creating your account with
-                <strong>Eat&Joy</strong>.
-                We're excited to have you with us!
+                Hello <strong>${userName}</strong>,
               </p>
 
               <p style="
@@ -89,13 +447,12 @@ export const getWelcomeEmailTemplate = (userName) => {
                 line-height:1.7;
                 color:#555;
               ">
-                Your account has been successfully created.
-                You can now discover delicious food from your
-                favorite restaurants, place orders, and enjoy
-                fast delivery right at your doorstep.
+                You have successfully logged in to your
+                <strong>Eat&Joy</strong> account.
+                We're happy to see you again!
               </p>
 
-              <!-- Features -->
+              <!-- Login Success Box -->
               <table
                 width="100%"
                 cellpadding="0"
@@ -108,59 +465,88 @@ export const getWelcomeEmailTemplate = (userName) => {
                 "
               >
                 <tr>
-                  <td style="padding:22px;">
+                  <td style="
+                    padding:22px;
+                    text-align:center;
+                  ">
+
+                    <div style="
+                      font-size:40px;
+                      margin-bottom:10px;
+                    ">
+                      ✅
+                    </div>
 
                     <h3 style="
-                      margin:0 0 18px;
+                      margin:0 0 8px;
                       color:#e23744;
                       font-size:18px;
                     ">
-                      🍴 What you can do
+                      You're Successfully Logged In
                     </h3>
 
                     <p style="
-                      margin:10px 0;
+                      margin:0;
                       font-size:14px;
-                      color:#555;
+                      color:#666;
+                      line-height:1.6;
                     ">
-                      🔍 Discover restaurants near you
-                    </p>
-
-                    <p style="
-                      margin:10px 0;
-                      font-size:14px;
-                      color:#555;
-                    ">
-                      🍕 Explore delicious food and menus
-                    </p>
-
-                    <p style="
-                      margin:10px 0;
-                      font-size:14px;
-                      color:#555;
-                    ">
-                      🛒 Add your favorite food to cart
-                    </p>
-
-                    <p style="
-                      margin:10px 0;
-                      font-size:14px;
-                      color:#555;
-                    ">
-                      🚴 Get fast doorstep delivery
-                    </p>
-
-                    <p style="
-                      margin:10px 0;
-                      font-size:14px;
-                      color:#555;
-                    ">
-                      ⭐ Rate and review your orders
+                      Your Eat&Joy account is ready.
+                      Start exploring delicious food and restaurants!
                     </p>
 
                   </td>
                 </tr>
               </table>
+
+              <!-- What You Can Do -->
+              <h3 style="
+                margin:25px 0 15px;
+                color:#222;
+                font-size:18px;
+              ">
+                🍴 What's waiting for you?
+              </h3>
+
+              <p style="
+                margin:10px 0;
+                font-size:14px;
+                color:#555;
+              ">
+                🔍 Discover restaurants near you
+              </p>
+
+              <p style="
+                margin:10px 0;
+                font-size:14px;
+                color:#555;
+              ">
+                🍕 Explore delicious food and menus
+              </p>
+
+              <p style="
+                margin:10px 0;
+                font-size:14px;
+                color:#555;
+              ">
+                🛒 Order your favorite meals
+              </p>
+
+              <p style="
+                margin:10px 0;
+                font-size:14px;
+                color:#555;
+              ">
+                🚴 Enjoy fast doorstep delivery
+              </p>
+
+              <p style="
+                margin:10px 0;
+                font-size:14px;
+                color:#555;
+              ">
+                ⭐ Rate and review your orders
+              </p>
 
               <!-- CTA -->
               <div style="
@@ -186,7 +572,7 @@ export const getWelcomeEmailTemplate = (userName) => {
 
               </div>
 
-              <!-- First Order Section -->
+              <!-- Security Notice -->
               <table
                 width="100%"
                 cellpadding="0"
@@ -199,28 +585,24 @@ export const getWelcomeEmailTemplate = (userName) => {
                 "
               >
                 <tr>
-                  <td
-                    style="
-                      padding:20px;
-                      text-align:center;
-                    "
-                  >
+                  <td style="padding:20px;">
 
                     <h3 style="
                       margin:0 0 8px;
                       color:#222;
+                      font-size:16px;
                     ">
-                      🎁 Ready for your first order?
+                      🔐 Security Notice
                     </h3>
 
                     <p style="
                       margin:0;
-                      font-size:14px;
+                      font-size:13px;
                       color:#666;
                       line-height:1.6;
                     ">
-                      Explore nearby restaurants and find
-                      something delicious to enjoy today.
+                      If you did not perform this login, please change
+                      your password immediately and contact our support team.
                     </p>
 
                   </td>
@@ -279,8 +661,8 @@ export const getWelcomeEmailTemplate = (userName) => {
               </p>
 
               <p style="margin:5px 0;">
-                You received this email because you created
-                an account on Eat&Joy.
+                You received this email because you logged in
+                to your Eat&Joy account.
               </p>
 
               <p style="margin:12px 0 0;">

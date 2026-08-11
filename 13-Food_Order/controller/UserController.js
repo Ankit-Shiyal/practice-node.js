@@ -8,7 +8,10 @@ import cloudinary from "../config/cloudinary.js";
 // import RestaurantModel from "../model/RestaurantModel.js";
 
 import sendEmail from "../utils/sendEmail.js";
-import { getWelcomeEmailTemplate } from "../template/emailTemplate.js";
+import {
+  getWelcomeEmailTemplate,
+  getLoginSuccessEmailTemplate,
+} from "../template/emailTemplate.js";
 
 // add user
 const add = async (req, res, next) => {
@@ -28,11 +31,10 @@ const add = async (req, res, next) => {
     });
 
     await newUser.save();
-
     await sendEmail({
       to: newUser.Email,
       subject: "Welcome to Eat&Joy 🍽️",
-      html: getWelcomeEmailTemplate(newUser.Name),
+      html: getWelcomeEmailTemplate(newUser.Name, "user"),
     });
 
     res.status(201).json({
@@ -57,6 +59,12 @@ const login = async (req, res, next) => {
     }
 
     const token = await user.generateAuthToken();
+
+    await sendEmail({
+      to: user.Email,
+      subject: "Successfully Logged",
+      html: getLoginSuccessEmailTemplate(user.Name),
+    });
 
     res.status(200).json({
       success: true,
