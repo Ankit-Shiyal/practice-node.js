@@ -31,8 +31,10 @@ const getAllUsers = async (req, res, next) => {
       .status(200)
       .json({ success: true, message: "user data found", totalUser, users });
   } catch (error) {
-    return next(new httpError(error.message));
+    return next(new HttpError(error.message));
   }
 };
 
-export default {getAllUsers}
+
+
+export default { getAllUsers,};
