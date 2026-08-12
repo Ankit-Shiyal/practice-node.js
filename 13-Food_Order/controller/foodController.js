@@ -101,8 +101,8 @@ const updateFood = async (req, res, next) => {
       foodUpdate[update] = req.body[update];
     });
 
-    if (req.files?.length > 0) {
-      if (foodUpdate.Cloudinary_Id?.length > 0) {
+    if (req.files ) {
+      if (foodUpdate.Cloudinary_Id) {
         for (const imageId of foodUpdate.Cloudinary_Id) {
           await cloudinary.uploader.destroy(imageId);
         }
@@ -111,7 +111,6 @@ const updateFood = async (req, res, next) => {
       foodUpdate.food_pic = req.files.map((file) => file.path);
       foodUpdate.Cloudinary_Id = req.files.map((file) => file.filename);
     }
-
     await foodUpdate.save();
 
     res.status(200).json({

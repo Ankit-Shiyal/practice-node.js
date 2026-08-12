@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const providerSchema = new mongoose.Schema({
@@ -12,13 +11,17 @@ const providerSchema = new mongoose.Schema({
     ref: "Restaurant",
     required: true,
   },
-  document:[ {
-    type: String,
-    required: true,
-  }],
-  Cloudinary_Id:[ {
-    type: String,
-  }],
+  document: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  Cloudinary_Id: [
+    {
+      type: String,
+    },
+  ],
   isVerified: {
     type: Boolean,
     default: false,

@@ -1,7 +1,4 @@
-
-
-import Joi from 'joi';
-
+import Joi from "joi";
 
 export const updateProviderSchema = Joi.object({
   restaurantName: Joi.string().max(25).messages({
@@ -11,14 +8,12 @@ export const updateProviderSchema = Joi.object({
   bankNumber: Joi.string()
     .pattern(/^\d{9,18}$/)
     .messages({
-      "string.pattern.base":
-        "Bank Number must contain 9 to 18 digits only",
+      "string.pattern.base": "Bank Number must contain 9 to 18 digits only",
     }),
 
   document: Joi.any().optional(),
 })
   .or("restaurantName", "bankNumber", "document")
   .messages({
-    "object.missing":
-      "restaurantName, bankNumber or document is required",
+    "object.missing": "restaurantName, bankNumber or document is required",
   });

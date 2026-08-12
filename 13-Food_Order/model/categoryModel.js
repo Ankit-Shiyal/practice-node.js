@@ -15,7 +15,6 @@ const categorySchema = mongoose.Schema({
       "Dessert",
       "Drinks",
     ],
-    require: true,
   },
   description: {
     type: String,

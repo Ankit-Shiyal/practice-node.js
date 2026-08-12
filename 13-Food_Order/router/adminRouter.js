@@ -8,8 +8,8 @@ import UserController from "../controller/UserController.js";
 
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
-import {profilePic} from "../middleware/upload.js";
-import adminController from "../controller/adminController.js"
+import { profilePic } from "../middleware/upload.js";
+import adminController from "../controller/adminController.js";
 
 // router
 const router = express.Router();
@@ -29,6 +29,6 @@ router.patch(
   UserController.updateUser,
 );
 
-router.get("/allUsers", auth,checkRole("admin"),adminController.getAllUsers)
+router.get("/allUsers", auth, checkRole("admin"), adminController.getAllUsers);
 
 export default router;

@@ -15,6 +15,7 @@ import adminRouter from "./router/adminRouter.js";
 import RestaurantRouter from "./router/RestaurantRouter.js";
 import ProviderRouter from "./router/ProviderRouter.js";
 import categoryRouter from "./router/categoryRouter.js";
+import foodRouter from "./router/foodRouter.js"
 
 const app = express();
 
@@ -24,7 +25,8 @@ app.use("/user", UserRouter);
 app.use("/admin", adminRouter);
 app.use("/restaurant", RestaurantRouter);
 app.use("/provider", ProviderRouter);
-app.use("/category",categoryRouter)
+app.use("/category", categoryRouter);
+app.use("/food", foodRouter)
 
 // server check
 app.get("/", (req, res) => {

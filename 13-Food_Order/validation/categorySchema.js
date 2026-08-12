@@ -24,19 +24,13 @@ export const addCategorySchema = Joi.object({
       "any.required": "Category name is required",
     }),
 
-  description: Joi.string()
-    .min(5)
-    .max(500)
-    .trim()
-    .required()
-    .messages({
-      "string.base": "Description must be in string format",
-      "string.min": "Description must be at least 5 characters long",
-      "string.max": "Description must not exceed 500 characters",
-      "any.required": "Description is required",
-    }),
+  description: Joi.string().min(5).max(500).trim().required().messages({
+    "string.base": "Description must be in string format",
+    "string.min": "Description must be at least 5 characters long",
+    "string.max": "Description must not exceed 500 characters",
+    "any.required": "Description is required",
+  }),
 });
-
 
 // Update Category
 export const updateCategorySchema = Joi.object({
@@ -57,13 +51,9 @@ export const updateCategorySchema = Joi.object({
       "any.only": "Please select a valid category",
     }),
 
-  description: Joi.string()
-    .min(5)
-    .max(500)
-    .trim()
-    .messages({
-      "string.base": "Description must be in string format",
-      "string.min": "Description must be at least 5 characters long",
-      "string.max": "Description must not exceed 500 characters",
-    }),
+  description: Joi.string().min(5).max(500).trim().messages({
+    "string.base": "Description must be in string format",
+    "string.min": "Description must be at least 5 characters long",
+    "string.max": "Description must not exceed 500 characters",
+  }),
 });

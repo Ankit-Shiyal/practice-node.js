@@ -7,7 +7,6 @@ import checkRole from "../middleware/checkRole.js";
 
 const router = express.Router();
 
-
 router.post(
   "/addFood",
   auth,
@@ -16,13 +15,7 @@ router.post(
   foodController.addFood,
 );
 
-
-router.get(
-  "/allFood",
-  auth,
-  foodController.getAllFood,
-);
-
+router.get("/allFood", auth, foodController.getAllFood);
 
 router.patch(
   "/update/:id",
