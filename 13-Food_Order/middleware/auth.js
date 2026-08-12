@@ -1,4 +1,3 @@
-
 // auth
 
 import jwt from "jsonwebtoken";

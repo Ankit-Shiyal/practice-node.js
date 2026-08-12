@@ -35,6 +35,4 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-
-
-export default { getAllUsers,};
+export default { getAllUsers };

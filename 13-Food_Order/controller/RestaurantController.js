@@ -52,7 +52,6 @@ const add = async (req, res, next) => {
       message: "Restaurant added successfully and email sent",
       newRestaurant,
     });
-
   } catch (error) {
     console.log("Restaurant Add Error:", error);
     next(new HttpError(error.message, 500));

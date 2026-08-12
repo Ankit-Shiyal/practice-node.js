@@ -60,7 +60,6 @@ const addProvider = async (req, res, next) => {
   }
 };
 
-
 const updateProvider = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -122,4 +121,4 @@ const deleteProvider = async (req, res, next) => {
   }
 };
 
-export default { addProvider, updateProvider, deleteProvider  };
+export default { addProvider, updateProvider, deleteProvider };
