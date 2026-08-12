@@ -31,11 +31,11 @@ const add = async (req, res, next) => {
     });
 
     await newUser.save();
-    await sendEmail({
-      to: newUser.Email,
-      subject: "Welcome to Eat&Joy 🍽️",
-      html: getWelcomeEmailTemplate(newUser.Name, "user"),
-    });
+    // await sendEmail({
+    //   to: newUser.Email,
+    //   subject: "Welcome to Eat&Joy 🍽️",
+    //   html: getWelcomeEmailTemplate(newUser.Name, "user"),
+    // });
 
     res.status(201).json({
       success: true,
@@ -60,11 +60,11 @@ const login = async (req, res, next) => {
 
     const token = await user.generateAuthToken();
 
-    await sendEmail({
-      to: user.Email,
-      subject: "Successfully Logged",
-      html: getLoginSuccessEmailTemplate(user.Name),
-    });
+    // await sendEmail({
+    //   to: user.Email,
+    //   subject: "Successfully Logged",
+    //   html: getLoginSuccessEmailTemplate(user.Name),
+    // });
 
     res.status(200).json({
       success: true,

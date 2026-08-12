@@ -39,11 +39,11 @@ const addProvider = async (req, res, next) => {
 
     await user.save();
 
-    await sendEmail({
-      to: user.Email,
-      subject: "Welcome to Eat&Joy - Provider Account 👨‍🍳",
-      html: getWelcomeEmailTemplate(user.Name, "provider"),
-    });
+    // await sendEmail({
+    //   to: user.Email,
+    //   subject: "Welcome to Eat&Joy - Provider Account 👨‍🍳",
+    //   html: getWelcomeEmailTemplate(user.Name, "provider"),
+    // });
 
     const provider = await providerModel
       .findById(newProvider._id)

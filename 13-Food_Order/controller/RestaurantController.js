@@ -38,14 +38,14 @@ const add = async (req, res, next) => {
 
     await newRestaurant.save();
 
-    await sendEmail({
-      to: req.user.Email,
-      subject: "Restaurant Added Successfully - Eat&Joy 🏪",
-      html: getWelcomeEmailTemplate(
-        newRestaurant.RestaurantName,
-        "restaurant"
-      ),
-    });
+    // await sendEmail({
+    //   to: req.user.Email,
+    //   subject: "Restaurant Added Successfully - Eat&Joy 🏪",
+    //   html: getWelcomeEmailTemplate(
+    //     newRestaurant.RestaurantName,
+    //     "restaurant"
+    //   ),
+    // });
 
     res.status(201).json({
       success: true,
