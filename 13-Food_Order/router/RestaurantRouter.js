@@ -6,7 +6,10 @@ import auth from "../middleware/auth.js";
 import RestaurantController from "../controller/RestaurantController.js";
 import checkRole from "../middleware/checkRole.js";
 import { RestaurantImage } from "../middleware/upload.js";
-import { restaurantSchema } from "../validation/RestaurantSchema.js";
+import {
+  restaurantSchema,
+  updateRestaurantSchema,
+} from "../validation/RestaurantSchema.js";
 import validate from "../middleware/validate.js";
 
 const router = express.Router();
@@ -17,7 +20,6 @@ router.post(
   checkRole("admin"),
   RestaurantImage.single("RestaurantImage"),
   validate(restaurantSchema),
-
   RestaurantController.add,
 );
 
@@ -33,6 +35,7 @@ router.patch(
   auth,
   checkRole("admin"),
   RestaurantImage.single("RestaurantImage"),
+  validate(updateRestaurantSchema),
   RestaurantController.updateRestaurant,
 );
 

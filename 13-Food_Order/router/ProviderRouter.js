@@ -3,7 +3,7 @@ import express from "express";
 import auth from "../middleware/auth.js";
 import { document } from "../middleware/upload.js";
 import ProviderController from "../controller/ProviderController.js";
-import { updateProviderSchema } from "../validation/ProviderSchema.js";
+import { providerSchema } from "../validation/ProviderSchema.js";
 import validate from "../middleware/validate.js";
 import checkRole from "../middleware/checkRole.js";
 
@@ -13,7 +13,7 @@ router.post(
   "/add",
   auth,
   document.array("document", 3),
-  validate(updateProviderSchema),
+  validate(providerSchema),
   ProviderController.addProvider,
 );
 

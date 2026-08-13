@@ -24,7 +24,7 @@ const addCategory = async (req, res, next) => {
     next(new HttpError(error.message, 500));
   }
 };
-
+ 
 const deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;

@@ -1,6 +1,4 @@
 // restaurantSchema
-
-// external module
 import Joi from "joi";
 
 export const restaurantSchema = Joi.object({
@@ -55,3 +53,32 @@ export const restaurantSchema = Joi.object({
     "any.required": "Close Time is required",
   }),
 });
+
+export const updateRestaurantSchema = restaurantSchema
+  .fork(
+    [
+      "RestaurantName",
+      "Address",
+      "Phone",
+      "description",
+      "state",
+      "city",
+      "openTime",
+      "closeTime",
+    ],
+    (field) => field.optional(),
+  )
+  .or(
+    "RestaurantName",
+    "Address",
+    "Phone",
+    "description",
+    "state",
+    "city",
+    "openTime",
+    "closeTime",
+    "RestaurantImage",
+  )
+  .messages({
+    "object.missing": "At least one restaurant field is required to update",
+  });

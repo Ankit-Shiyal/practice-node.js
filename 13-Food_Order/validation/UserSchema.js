@@ -1,6 +1,5 @@
 //userSchema
 
-// external module
 import Joi from "joi";
 
 // validation

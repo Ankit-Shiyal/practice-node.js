@@ -1,8 +1,8 @@
 import Joi from "joi";
 
-export const updateProviderSchema = Joi.object({
+export const providerSchema = Joi.object({
   restaurantName: Joi.string().max(25).messages({
-    "string.max": "Restaurant Id must be 25 characters",
+    "string.max": "Restaurant Name must not exceed 25 characters",
   }),
 
   bankNumber: Joi.string()
@@ -15,5 +15,14 @@ export const updateProviderSchema = Joi.object({
 })
   .or("restaurantName", "bankNumber", "document")
   .messages({
-    "object.missing": "restaurantName, bankNumber or document is required",
+    "object.missing":
+      "At least one of restaurantName, bankNumber or document is required",
+  });
+
+export const updateProviderSchema = providerSchema
+  .fork(["restaurantName", "bankNumber"], (field) => field.optional())
+  .or("restaurantName", "bankNumber", "document")
+  .messages({
+    "object.missing":
+      "At least one of restaurantName, bankNumber or document is required",
   });
