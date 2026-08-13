@@ -15,18 +15,28 @@ import adminRouter from "./router/adminRouter.js";
 import RestaurantRouter from "./router/RestaurantRouter.js";
 import ProviderRouter from "./router/ProviderRouter.js";
 import categoryRouter from "./router/categoryRouter.js";
-import foodRouter from "./router/foodRouter.js"
+import foodRouter from "./router/foodRouter.js";
+
+import { rateLimit } from "express-rate-limit";
+import helmet from "helmet";
+import hpp from "hpp";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(helmet());
+
+app.use(rateLimit());
+
+app.use(hpp());
 
 app.use("/user", UserRouter);
 app.use("/admin", adminRouter);
 app.use("/restaurant", RestaurantRouter);
 app.use("/provider", ProviderRouter);
 app.use("/category", categoryRouter);
-app.use("/food", foodRouter)
+app.use("/food", foodRouter);
 
 // server check
 app.get("/", (req, res) => {
