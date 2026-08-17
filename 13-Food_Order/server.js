@@ -16,6 +16,7 @@ import RestaurantRouter from "./router/RestaurantRouter.js";
 import ProviderRouter from "./router/ProviderRouter.js";
 import categoryRouter from "./router/categoryRouter.js";
 import foodRouter from "./router/foodRouter.js";
+import orderRouter from "./router/orderRouter.js"
 
 import { rateLimit } from "express-rate-limit";
 import helmet from "helmet";
@@ -37,6 +38,7 @@ app.use("/restaurant", RestaurantRouter);
 app.use("/provider", ProviderRouter);
 app.use("/category", categoryRouter);
 app.use("/food", foodRouter);
+app.use("/order", orderRouter)
 
 // server check
 app.get("/", (req, res) => {
