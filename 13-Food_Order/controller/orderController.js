@@ -22,11 +22,11 @@ const addOrder = async (req, res, next) => {
       );
       const itemsTotal = foodFound.price * item.quantity;
       totalAmount += itemsTotal;
+
       return {
         food: foodFound._id,
         quantity: item.quantity,
-        price: foodFound.price,
-        itemTotal: foodFound.price * item.quantity,
+
       };
     });
 
