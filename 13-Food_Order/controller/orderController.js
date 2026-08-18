@@ -1,4 +1,5 @@
-import orderModel from "../model/OrderModel.js";
+import orderModel from "../model/orderModel.js";
+import foodModel from "../model/foodModel.js";
 import HttpError from "../middleware/HttpError.js";
 
 const addOrder = async (req, res, next) => {
@@ -7,9 +8,14 @@ const addOrder = async (req, res, next) => {
 
     const { restaurant, items, deliveryAddress, phone } = req.body;
 
+    const foodIds = items.map((item) => item.food);
 
-    const newOrder = new orderModel({
-      user: userId,
+    const foods = await foodModel.find({
+      _id: { $in: foodIds },
+    });
+
+    const order = await orderModel.create({
+      customerName: userId,
       restaurant,
       items,
       totalAmount,
@@ -17,18 +23,14 @@ const addOrder = async (req, res, next) => {
       phone,
     });
 
-    await newOrder.save();
-
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Order placed successfully",
       order,
     });
   } catch (error) {
-    next(new HttpError(error.message, 500));
+    return next(new HttpError(error.message));
   }
 };
 
-export default {
-  addOrder,
-};
+export default { addOrder };

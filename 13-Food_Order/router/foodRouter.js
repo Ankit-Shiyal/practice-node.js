@@ -4,8 +4,8 @@ import foodController from "../controller/foodController.js";
 import { foodImage } from "../middleware/upload.js";
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
-import validate from "../middleware/validate.js"
-import {addFoodSchema,updateFoodSchema} from "../validation/foodSchema.js"
+import validate from "../middleware/validate.js";
+import { addFoodSchema, updateFoodSchema } from "../validation/foodSchema.js";
 
 const router = express.Router();
 
