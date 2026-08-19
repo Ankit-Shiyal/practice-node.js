@@ -13,7 +13,7 @@ const addOrder = async (req, res, next) => {
     const foods = await foodModel.find({
       _id: { $in: foodIds },
     });
-
+ 
     let totalAmount = 0;
 
     const orderItems = items.map((item) => {
@@ -22,11 +22,10 @@ const addOrder = async (req, res, next) => {
       );
       const itemsTotal = foodFound.price * item.quantity;
       totalAmount += itemsTotal;
-
+ 
       return {
         food: foodFound._id,
         quantity: item.quantity,
-
       };
     });
 
@@ -40,31 +39,30 @@ const addOrder = async (req, res, next) => {
     });
 
     const orderPopulate = await order.populate([
-  {
-    path: "customerName",
-    select: "Name Email Phone -_id",
-  },
-  {
-    path: "restaurant",
-    select: "RestaurantName Address Phone -_id",
-  },
-  {
-    path: "items.food",
-    select: "name price description -_id",
-  },
-]);
+      {
+        path: "customerName",
+        select: "Name Email Phone -_id",
+      },
+      {
+        path: "restaurant",
+        select: "RestaurantName Address Phone -_id",
+      },
+      {
+        path: "items.food",
+        select: "name price description -_id",
+      },
+    ]);
 
     return res.status(201).json({
       success: true,
       message: "Order placed successfully",
       order,
-       order: orderPopulate,
+      order: orderPopulate,
     });
   } catch (error) {
     return next(new HttpError(error.message));
   }
 };
-
 
 const deleteOrder = async (req, res, next) => {
   try {
@@ -72,7 +70,7 @@ const deleteOrder = async (req, res, next) => {
 
     const { id } = req.params;
 
-    const order = await orderModel.findOneAndDelete({ _id:id});
+    const order = await orderModel.findOneAndDelete({ _id: id });
 
     if (!order) {
       return next(new HttpError("Order not found", 404));
@@ -87,4 +85,4 @@ const deleteOrder = async (req, res, next) => {
   }
 };
 
-export default { addOrder,deleteOrder };
+export default { addOrder, deleteOrder };
