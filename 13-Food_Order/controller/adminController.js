@@ -3,6 +3,7 @@ import HttpError from "../middleware/HttpError.js";
 import RestaurantModel from "../model/RestaurantModel.js";
 import providerModel from "../model/ProviderModel.js";
 import foodModel from "../model/foodModel.js";
+import orderModel from "../model/orderModel.js";
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -71,6 +72,29 @@ const dashBoardStatics = async (req, res, next) => {
 
     const totalFood = await foodModel.countDocuments();
 
+    const totalVerifiedFood = await foodModel.countDocuments({
+      isVerified: "true",
+    });
+
+    const totalRejectedFood = await foodModel.countDocuments({
+      isVerified: "false",
+    });
+
+    const totalIsAvailableFood = await foodModel.countDocuments({
+      isAvailable: "true",
+    });
+
+    const totalOrder = await orderModel.countDocuments();
+
+    const totalRevenue = await orderModel.aggregate([
+      {
+        $group: {
+          _id: null,
+          revenue: { $sum: "$totalAmount" },
+        },
+      },
+    ]);
+
     res.status(200).json({
       success: true,
       message: "dashboard statics fetched successfully",
@@ -83,6 +107,11 @@ const dashBoardStatics = async (req, res, next) => {
       totalVerifiedRestaurant,
       totalRejectedRestaurant,
       totalFood,
+      totalVerifiedFood,
+      totalRejectedFood,
+      totalIsAvailableFood,
+      totalOrder,
+      totalRevenue,
     });
   } catch (error) {
     return next(new HttpError(error.message));
