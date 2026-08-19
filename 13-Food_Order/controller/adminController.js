@@ -95,6 +95,15 @@ const dashBoardStatics = async (req, res, next) => {
       },
     ]);
 
+    const orderStatus = await orderModel.aggregate([
+      {
+        $group: {
+          _id: "$orderStatus",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
     res.status(200).json({
       success: true,
       message: "dashboard statics fetched successfully",
@@ -112,6 +121,7 @@ const dashBoardStatics = async (req, res, next) => {
       totalIsAvailableFood,
       totalOrder,
       totalRevenue,
+      orderStatus,
     });
   } catch (error) {
     return next(new HttpError(error.message));
