@@ -5,6 +5,8 @@ import modelUser from "../model/UserModel.js";
 import HttpError from "../middleware/HttpError.js";
 import cloudinary from "../config/cloudinary.js";
 
+import auditLogger from "../middleware/auditLogger.js";
+
 // import RestaurantModel from "../model/RestaurantModel.js";
 
 import sendEmail from "../utils/sendEmail.js";
@@ -65,6 +67,15 @@ const login = async (req, res, next) => {
     //   subject: "Successfully Logged",
     //   html: getLoginSuccessEmailTemplate(user.Name),
     // });
+
+    await auditLogger({
+      action: "USER_LOGIN",
+      performedBy: user._id,
+      module: "user",
+      targetedId: user._id,
+      Ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
 
     res.status(200).json({
       success: true,
