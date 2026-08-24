@@ -19,8 +19,6 @@ const checkRole =
 export default checkRole;
 
 
-
-
 // import HttpError from "./HttpError.js";
 
 // const checkRole =
