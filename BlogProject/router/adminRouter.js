@@ -1,8 +1,6 @@
 import express from "express";
 
-import UserController from "../controller/UserController.js";
-import { registerSchema, updateUserSchema } from "../validation/UserSchema.js";
-import validate from "../middleware/validate.js";
+import UserController from "../controller/userController.js";
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
 import upload from "../middleware/upload.js";
