@@ -9,8 +9,11 @@ import connectDB from "./config/db.js";
 import userRouter from "./router/UserRouter.js";
 import adminRouter from "./router/adminRouter.js";
 import BlogRouter from "./router/BlogRouter.js";
+import cors from "cors"
 
 const app = express();
+
+app.use(cors())
 
 app.use(express.json());
 
