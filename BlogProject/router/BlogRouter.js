@@ -32,8 +32,6 @@ router.patch(
 );
 router.get(
   "/allBlog",
-  auth,
-  checkRole("user", "admin"),
   BlogController.getAllBlogs,
 );
 
